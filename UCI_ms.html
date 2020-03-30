@@ -188,11 +188,85 @@ summary {
 
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
-<p>Abstract text.</p>
+<p>In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh spp persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management. We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.</p>
+<p>YOu add your reference in BibTex format to the bib file, refs.bib. If you have mendeley or something similar, you can copy a reference over in the correct format. otherwise you need to do it your self.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Introduction text. blah blah blah <span class="citation">[@Ochoa-Ochoa2012]</span>. <span class="citation">@Ochoa-Ochoa2012</span> blah blah blah</p>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<div id="study-region" class="section level2">
+<h2>Study Region</h2>
+<p>This study focued on a costal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W). The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including subtidal, mudflat, and salt marsh habitat. This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.</p>
+<p>Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds.</p>
+<!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
+</div>
+<div id="marsh-surface-modeling" class="section level2">
+<h2>Marsh surface modeling</h2>
+<ol style="list-style-type: decimal">
+<li>Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modling could go</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Background</li>
+<li>Technical details</li>
+<li>Study domain</li>
+</ol>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Calibration</li>
+<li><pre><code>Validation </code></pre></li>
+<li>Scenario analysis</li>
+<li>SLR</li>
+<li>sediment management</li>
+</ol>
+</div>
+<div id="biological-model" class="section level2">
+<h2>Biological model</h2>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways’s rail <em>Rallus obsoletus</em> (LFRR), and the Belding’s savannah sparrow <em>Passerculus sandwichensis beldingi</em> (BSS).</p>
+</div>
+<div id="light-footed-ridgways-rail-model" class="section level2">
+<h2>Light-footed Ridgway’s rail model</h2>
+<p>The LFRR is a sub-species of Ridgway’s rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail <span class="citation">(Maley and Brumfield 2013)</span>. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (<em>Spartina foliosa</em>) for nesting and foraging <span class="citation">(Zedler 1993, <span class="citation">Zembal and Fancher (1988)</span>, <span class="citation">Massey, Zembal, and Jorgensen (1984)</span>)</span>. We therefore used the height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios predicted with Delft3D. The modeling for the LFRR consisted of three steps: 1. calculate inudation of the marsh surface area, 2. predict <em>S. foliosa</em> maximum height from the inundation patterns, and 3. Predict habitat suitabilty for the LFRR.</p>
+</div>
+<div id="beldings-savannah-sparrow-model" class="section level2">
+<h2>Belding’s savannah sparrow model</h2>
+<p>The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.</p>
+</div>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<ol style="list-style-type: decimal">
+<li><p>Spatial maps with scenarios - %inundation, S foliosa, LFRR suitability, BSS suitability</p></li>
+<li>Stacked bar chart comparing habitat outcomes under the different scenarios</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Elevation zones, vegetation zones, suitability zones</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>Table showing acreage of habitat occupancy with</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>SLR and business as usual sediment management</li>
+<li>SLR and no dredge</li>
+<li>SLR and, dredging as usual, and augmentation</li>
+</ol>
+<div id="refs" class="references">
+<div id="ref-Maley2013">
+<p>Maley, James M., and Robb T. Brumfield. 2013. “Mitochondrial and Next-Generation Sequence Data Used to Infer Phylogenetic Relationships and Species Limits in the Clapper/King Rail Complex.” <em>The Condor</em> 115 (2): 316–29. doi:<a href="https://doi.org/10.1525/cond.2013.110138">10.1525/cond.2013.110138</a>.</p>
+</div>
+<div id="ref-Massey1984">
+<p>Massey, Barbara W., Richard Zembal, and P. D. Jorgensen. 1984. “Nesting Habitat of the Light-Footed Clapper Rail in Southern California.” <em>Journal of Field Ornithology</em> 55 (1): 67–80. <a href="http://www.jstor.org/stable/4512858" class="uri">http://www.jstor.org/stable/4512858</a>.</p>
+</div>
+<div id="ref-Zedler1993">
+<p>Zedler, Joy B. 1993. “Canopy Architecture of Natural and Planted Cordgrass Marshes : Selecting Habitat Evaluation Criteria.” <em>Ecological Applications</em> 3 (1): 123–38.</p>
+</div>
+<div id="ref-Zembal1988">
+<p>Zembal, Richard, and Jack M. Fancher. 1988. “Foraging behavior and foods of the light-footed clapper rail.” <em>Condor</em> 90 (4): 959–62. doi:<a href="https://doi.org/10.2307/1368864">10.2307/1368864</a>.</p>
+</div>
+</div>
 </div>
 
 
