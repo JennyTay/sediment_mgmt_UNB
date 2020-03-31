@@ -187,8 +187,8 @@ summary {
 
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
-<p>In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh spp persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management. We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.</p>
-<p>YOu add your reference in BibTex format to the bib file, refs.bib. If you have mendeley or something similar, you can copy a reference over in the correct format. otherwise you need to do it your self.</p>
+<p>In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh species persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management. We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.</p>
+<p>You add your reference in BibTeX format to the bib file, refs.bib. If you have mendeley or something similar, you can copy a reference over in the correct format. otherwise you need to do it your self.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
@@ -197,12 +197,9 @@ summary {
 <h1>Methods</h1>
 <div id="study-region" class="section level3">
 <h3>Study region</h3>
-<p>This study focued on a costal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W). The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including subtidal, mudflat, and salt marsh habitat. This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.</p>
+<p>This study focused on a coastal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W). The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including sub-tidal, mudflat, and salt marsh habitat. This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.</p>
 <p>Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds.</p>
 <!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
-</div>
-<div id="biological-model" class="section level3">
-<h3>Biological model</h3>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -210,21 +207,33 @@ summary {
 </div>
 <div id="light-footed-ridgways-rail-model" class="section level3">
 <h3>Light-footed Ridgway’s rail model</h3>
-<p>The LFRR is a sub-species of Ridgway’s rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail <span class="citation">(Maley and Brumfield 2013)</span>. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (<em>Spartina foliosa</em>) for nesting and foraging <span class="citation">(Zedler 1993, <span class="citation">Zembal and Fancher (1988)</span>, <span class="citation">Massey, Zembal, and Jorgensen (1984)</span>)</span>. We therefore used the maximum height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios. The modeling for the LFRR consisted of three steps: 1. Develop model to predict <em>S. foliosa</em> maximum height from marsh surface elevation, 2. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios, and 3. Predict habitat suitabilty for the LFRR in future years.</p>
+<p>The LFRR is a sub-species of Ridgway’s rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail <span class="citation">(Maley and Brumfield 2013)</span>. While nest sites have been observed in different vegetation settings, generally the LFRR is known to prefer tall cordgrass (<em>Spartina foliosa</em>) for nesting and foraging <span class="citation">(Zedler 1993, <span class="citation">Zembal and Fancher (1988)</span>, <span class="citation">Massey, Zembal, and Jorgensen (1984)</span>)</span>. We therefore used the maximum height of cordgrass as our indicator for the suitability of the salt marsh under the potential surface elevation scenarios. The modeling for the LFRR consisted of three steps: 1. Develop model to predict <em>S. foliosa</em> maximum height from marsh surface elevation, 2. Predict habitat suitability for the LFRR using the maximum height of <em>S.foliosa</em> , and 3. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.</p>
 <div id="model-for-s.-foliosa-maximum-height" class="section level4">
 <h4>Model for <em>S. foliosa</em> maximum height</h4>
-<p>To develop a model for maximum height of <em>S. foliosa</em> We used a zero inflated negative binomial model – the height was modeled with annual inundation during the summer month and annual inundation during the summer month squared, and the binomial was modeled with annual inundation during the summer month. This allowed us to first predict the presence or absence of <em>S. foliosa</em>, and if present, we predicted the maximum height. To calucate inundation during the summer months, we used elevation data (NAVD88) collected with RTK-GPS at 1,037 points in a portion of the marsh in the winter of 2012 <span class="citation">(Thorne et al. 2018)</span>. We subtracted hourly water level (NAVD88) recorded from a National Oceanic and Atmosphereic Association (NOAA) gague in 2012 from the elevation over the entire year. Any time the subtraction yielded a negative number, it signified that that part of the marsh was submerged. We then calcuated the percentage of the summer months (April - September) that that part of the marsh was submerged. We focused on the summer months because that is the growing season.</p>
-<p>In addition to recording elevation, <span class="citation">Thorne et al. (2018)</span></p>
+<!--- I need to add in the method for interpolation that I used for the vegetation and for the elevation --->
+<p>To develop a model for maximum height of <em>S. foliosa</em> we used a zero-inflated negative binomial model <span class="citation">(Mullahy 1986)</span>. For a thorough review of zero-inflated models see the review by <span class="citation">Ridout, Demétrio, and Hinde (1998)</span>. In our model, the height was modeled with annual inundation during the summer month and annual inundation during the summer month squared, and the binomial was modeled with annual inundation during the summer month. This allowed us to first predict the presence or absence of <em>S. foliosa</em>, and if present, we predicted the maximum height. To calculate inundation during the summer months, we used elevation data (NAVD88) collected with RTK-GPS at 1,037 points in a portion of the marsh in the winter of 2012 <span class="citation">(Thorne et al. 2018)</span>. We subtracted hourly water level (NAVD88) recorded from a National Oceanic and Atmospheric Association (NOAA) gauge in 2012 from the elevation over the entire year. Any time the subtraction yielded a negative number, it signified that that part of the marsh was submerged. We then calculated the percentage of the summer months (April - September) that that part of the marsh was submerged. We focused on the summer months because that is the growing season in southern California.</p>
+<p>In addition to recording elevation in their 2012 survey, <span class="citation">Thorne et al. (2018)</span> documented vegetation characteristics at a subset of the points they measured elevation, including: the heights and percent covers of each vegetation species. we used the inundation metrics to model and predict the maximum height of <em>S. foliosa</em> using a zero-inflated model described above, and all the variables were significant at the P&lt;0.001 level. To predict with a zero inflated model, we used the model to predict a “response”, or a numerical value for the <em>S. foliosa</em> height, and a “zero” or a probability of the maximum height being zero (which is interpreted as no <em>S. foliosa</em> present). If the probability of a zero was greater than 0.5, we assigned that value to be 0, and if it was less than 0.5, we assigned it to be 1. Then we multiplied the “response’ and the “zero” together such that the final value was 0 is the prob of 0 was &gt;0.5 and it was a numerical height if the probability of zero was &lt;0.5. When using this model for prediction on the training data (2012), 5.8% that show <em>S.foliosa</em> presence when in fact there was no <em>S. foliosa</em> observed (a false positive), and 6.2% that show no <em>S. folida</em> when in fact it was observed (a false negative).<!--- 5.8 % is 14/240 and 6.2% is 15/240 ---> The model for <em>S. folisa</em> maximum height was applied to baseline years 2011-2018 using the NOAA water level data for the appropriate year and the elevation for the marsh surface calculated by subtracting or adding the average wetland accretion annual rate to the measured 2012 data. The average annual accretion rate was measured from surface elevation tables at Upper Newport Bay (Cite Karens Data, ask her how). While we do not have <em>S. foliosa</em> maximum height for these other years to provide additional model validation, we will use the predicted maximum height to predict the habitat suitability for LFRR, which we can validate with annual LFRR surveys during those years.</p>
 </div>
+<div id="habitat-suitability" class="section level4">
+<h4>Habitat suitability</h4>
+<div id="light-footed-ridgways-rail" class="section level5">
+<h5>Light-footed Ridgway’s rail</h5>
+<p>We modeled LFRR habitat suitability using measures of <em>S. foliosa</em> maximum height and LFRR occurrence. The maximum height of <em>S. folisa</em> was derived for the yeras 2011-2018 using the method described in the previous section. The LFRR occurrence data was compiled from surveys conducted from the 2011 breeding season through the 2018 breeding season for Upper Newport Bay <span class="citation">(Zembal et al. 2016)</span>. Briefly, the surveys employ ‘evening clappering’ call counts - the surveyor walks around the marsh at the start of breeding season and listens for LFRR calls from pairs vocally defending their nests or advertising for a mate. If no calls are heard, a recording of a LFRR call is played to elicit a response from a pair who thinks their territory is being intruded upon. The type of call indicates if the location is a nesting territory. The location of the call is recorded on a marsh map. The 2011-2018 LFRR survey maps were georeferenced using ArcGIS version 10.6 and a buffer was added surrounding each point to address uncertainty. <!--- add in supplement to explian how the buffer was added---></p>
+<p>We used RStudio to partition the area of Upper Newport Bay, subtidal through upper marsh habitat, into approximately 0.40ha plots, which represents the average area per LFRR nest (R. Zembal per. comm.). Modeling at this scale prevents over predicting the carrying capacity of the marsh. Each plot was assigned a percentage of years occupied, out of eight total years (2011-2018), depending on the number of years that a georeferenced LFRR survey point or buffer occurred within, or intsected, the plot.</p>
+<p>We trained a logistic regression model with eight weights to predict the percentage of years (out of eight total) that a LFRR occupied a plot. We used two measures of maximum <em>S. foliosa</em> height: The percentage of the plot with the maximum <em>S. foliosa</em> value greater than 60cm <span class="citation">(Zedler 1993)</span> and the 95th percentile value of the distribution of maximum <em>S.folisa</em> heights. To calculate these two measures, using the Raster package in R, we extracted all the predicted values for the maximum <em>S. foliosa</em> heights within each plot and then calculated either the perentage greater than 60cm or the 95th percentile. P-values were significant at the P&lt;0.001 value and odds ratios were greater than one suggesting a postive effect on LFRR occupancy.</p>
+<p>We validated this habitat suitabilty model</p>
 </div>
-<div id="beldings-savannah-sparrow-model" class="section level3">
-<h3>Belding’s savannah sparrow model</h3>
+<div id="beldings-savannah-sparrow-model" class="section level5">
+<h5>Belding’s savannah sparrow model</h5>
 <p>The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.</p>
 </div>
-<div id="marsh-surface-modeling" class="section level3">
-<h3>Marsh surface modeling</h3>
+</div>
+<div id="future-predictions" class="section level4">
+<h4>Future predictions</h4>
+<div id="marsh-surface-modeling" class="section level5">
+<h5>Marsh surface modeling</h5>
 <ol style="list-style-type: decimal">
-<li>Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modling could go</li>
+<li>Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modeling could go</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
 <li>Background</li>
@@ -238,6 +247,11 @@ summary {
 <li>SLR</li>
 <li>sediment management</li>
 </ol>
+</div>
+<div id="habitat-suitability-1" class="section level5">
+<h5>Habitat suitability</h5>
+</div>
+</div>
 </div>
 </div>
 <div id="results" class="section level1">
@@ -257,12 +271,21 @@ summary {
 <li>SLR and no dredge</li>
 <li>SLR and, dredging as usual, and augmentation</li>
 </ol>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
 <div id="refs" class="references">
 <div id="ref-Maley2013">
 <p>Maley, James M., and Robb T. Brumfield. 2013. “Mitochondrial and Next-Generation Sequence Data Used to Infer Phylogenetic Relationships and Species Limits in the Clapper/King Rail Complex.” <em>The Condor</em> 115 (2): 316–29. doi:<a href="https://doi.org/10.1525/cond.2013.110138">10.1525/cond.2013.110138</a>.</p>
 </div>
 <div id="ref-Massey1984">
 <p>Massey, Barbara W., Richard Zembal, and P. D. Jorgensen. 1984. “Nesting Habitat of the Light-Footed Clapper Rail in Southern California.” <em>Journal of Field Ornithology</em> 55 (1): 67–80. <a href="http://www.jstor.org/stable/4512858" class="uri">http://www.jstor.org/stable/4512858</a>.</p>
+</div>
+<div id="ref-mullahy1986">
+<p>Mullahy, John. 1986. “Specifications and Testing of Some Modified Count Data Models.” <em>Journal of Econometrics</em> 33 (3): 341–65.</p>
+</div>
+<div id="ref-ridout1998">
+<p>Ridout, Martin, Clarice G.B. Demétrio, and John Hinde. 1998. <em>Models for Count Data with Many Zeros</em>. Cape Town: Proceedings from the International Biometric Conference.</p>
 </div>
 <div id="ref-Thorne2018">
 <p>Thorne, Karen, Glen Macdonald, Glenn Guntenspergen, Richard Ambrose, Kevin Buffington, Bruce Dugger, Chase Freeman, et al. 2018. “U.S. Pacific coastal wetland resilience and vulnerability to sea-level rise.” <em>Science Advances</em> 4 (February): 1–11. doi:<a href="https://doi.org/10.1126/sciadv.aao3270">10.1126/sciadv.aao3270</a>.</p>
@@ -272,6 +295,9 @@ summary {
 </div>
 <div id="ref-Zembal1988">
 <p>Zembal, Richard, and Jack M. Fancher. 1988. “Foraging behavior and foods of the light-footed clapper rail.” <em>Condor</em> 90 (4): 959–62. doi:<a href="https://doi.org/10.2307/1368864">10.2307/1368864</a>.</p>
+</div>
+<div id="ref-Zembal2016">
+<p>Zembal, Richard, Susan M. Hoffman, Charles Gailband, and John Konecny. 2016. “Light-footed Ridgway’s (Clapper) Rail Management, Study, and Zoological Breeding in California 2016 Season.” Sacramento, CA: California Department of Fish; Wildlife, Wildlife Branch, Nongame Wildlife Program Report, 2016-04.</p>
 </div>
 </div>
 </div>
