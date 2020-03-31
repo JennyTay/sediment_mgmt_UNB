@@ -179,7 +179,6 @@ summary {
 
 
 <h1 class="title toc-ignore">The potential for sediment management to ameliorate the impacts of sea level rise in coastal salt marsh habitats</h1>
-<h3 class="subtitle">practice using Rmarkdown to collaborate on a paper</h3>
 <h4 class="author">Jenny Rogers and Matt Brand</h4>
 <h4 class="date">March 29, 2020</h4>
 
@@ -196,14 +195,34 @@ summary {
 </div>
 <div id="methods" class="section level1">
 <h1>Methods</h1>
-<div id="study-region" class="section level2">
-<h2>Study Region</h2>
+<div id="study-region" class="section level3">
+<h3>Study region</h3>
 <p>This study focued on a costal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W). The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including subtidal, mudflat, and salt marsh habitat. This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.</p>
 <p>Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds.</p>
 <!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
 </div>
-<div id="marsh-surface-modeling" class="section level2">
-<h2>Marsh surface modeling</h2>
+<div id="biological-model" class="section level3">
+<h3>Biological model</h3>
+</div>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways’s rail <em>Rallus obsoletus</em> (LFRR), and the Belding’s savannah sparrow <em>Passerculus sandwichensis beldingi</em> (BSS).</p>
+</div>
+<div id="light-footed-ridgways-rail-model" class="section level3">
+<h3>Light-footed Ridgway’s rail model</h3>
+<p>The LFRR is a sub-species of Ridgway’s rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail <span class="citation">(Maley and Brumfield 2013)</span>. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (<em>Spartina foliosa</em>) for nesting and foraging <span class="citation">(Zedler 1993, <span class="citation">Zembal and Fancher (1988)</span>, <span class="citation">Massey, Zembal, and Jorgensen (1984)</span>)</span>. We therefore used the maximum height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios. The modeling for the LFRR consisted of three steps: 1. Develop model to predict <em>S. foliosa</em> maximum height from marsh surface elevation, 2. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios, and 3. Predict habitat suitabilty for the LFRR in future years.</p>
+<div id="model-for-s.-foliosa-maximum-height" class="section level4">
+<h4>Model for <em>S. foliosa</em> maximum height</h4>
+<p>To develop a model for maximum height of <em>S. foliosa</em> We used a zero inflated negative binomial model – the height was modeled with annual inundation during the summer month and annual inundation during the summer month squared, and the binomial was modeled with annual inundation during the summer month. This allowed us to first predict the presence or absence of <em>S. foliosa</em>, and if present, we predicted the maximum height. To calucate inundation during the summer months, we used elevation data (NAVD88) collected with RTK-GPS at 1,037 points in a portion of the marsh in the winter of 2012 <span class="citation">(Thorne et al. 2018)</span>. We subtracted hourly water level (NAVD88) recorded from a National Oceanic and Atmosphereic Association (NOAA) gague in 2012 from the elevation over the entire year. Any time the subtraction yielded a negative number, it signified that that part of the marsh was submerged. We then calcuated the percentage of the summer months (April - September) that that part of the marsh was submerged. We focused on the summer months because that is the growing season.</p>
+<p>In addition to recording elevation, <span class="citation">Thorne et al. (2018)</span></p>
+</div>
+</div>
+<div id="beldings-savannah-sparrow-model" class="section level3">
+<h3>Belding’s savannah sparrow model</h3>
+<p>The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.</p>
+</div>
+<div id="marsh-surface-modeling" class="section level3">
+<h3>Marsh surface modeling</h3>
 <ol style="list-style-type: decimal">
 <li>Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modling could go</li>
 </ol>
@@ -219,21 +238,6 @@ summary {
 <li>SLR</li>
 <li>sediment management</li>
 </ol>
-</div>
-<div id="biological-model" class="section level2">
-<h2>Biological model</h2>
-</div>
-<div id="overview" class="section level2">
-<h2>Overview</h2>
-<p>We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways’s rail <em>Rallus obsoletus</em> (LFRR), and the Belding’s savannah sparrow <em>Passerculus sandwichensis beldingi</em> (BSS).</p>
-</div>
-<div id="light-footed-ridgways-rail-model" class="section level2">
-<h2>Light-footed Ridgway’s rail model</h2>
-<p>The LFRR is a sub-species of Ridgway’s rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail <span class="citation">(Maley and Brumfield 2013)</span>. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (<em>Spartina foliosa</em>) for nesting and foraging <span class="citation">(Zedler 1993, <span class="citation">Zembal and Fancher (1988)</span>, <span class="citation">Massey, Zembal, and Jorgensen (1984)</span>)</span>. We therefore used the height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios predicted with Delft3D. The modeling for the LFRR consisted of three steps: 1. calculate inudation of the marsh surface area, 2. predict <em>S. foliosa</em> maximum height from the inundation patterns, and 3. Predict habitat suitabilty for the LFRR.</p>
-</div>
-<div id="beldings-savannah-sparrow-model" class="section level2">
-<h2>Belding’s savannah sparrow model</h2>
-<p>The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.</p>
 </div>
 </div>
 <div id="results" class="section level1">
@@ -259,6 +263,9 @@ summary {
 </div>
 <div id="ref-Massey1984">
 <p>Massey, Barbara W., Richard Zembal, and P. D. Jorgensen. 1984. “Nesting Habitat of the Light-Footed Clapper Rail in Southern California.” <em>Journal of Field Ornithology</em> 55 (1): 67–80. <a href="http://www.jstor.org/stable/4512858" class="uri">http://www.jstor.org/stable/4512858</a>.</p>
+</div>
+<div id="ref-Thorne2018">
+<p>Thorne, Karen, Glen Macdonald, Glenn Guntenspergen, Richard Ambrose, Kevin Buffington, Bruce Dugger, Chase Freeman, et al. 2018. “U.S. Pacific coastal wetland resilience and vulnerability to sea-level rise.” <em>Science Advances</em> 4 (February): 1–11. doi:<a href="https://doi.org/10.1126/sciadv.aao3270">10.1126/sciadv.aao3270</a>.</p>
 </div>
 <div id="ref-Zedler1993">
 <p>Zedler, Joy B. 1993. “Canopy Architecture of Natural and Planted Cordgrass Marshes : Selecting Habitat Evaluation Criteria.” <em>Ecological Applications</em> 3 (1): 123–38.</p>

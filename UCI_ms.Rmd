@@ -29,7 +29,7 @@ Introduction
 Methods
 ===============================================================
 
-##Study Region
+### Study region
 This study focued on a costal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W).  The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including subtidal, mudflat, and salt marsh habitat.  This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.
 
 Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds. 
@@ -39,7 +39,26 @@ Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi cha
 
 
 
-##Marsh surface modeling
+### Biological model
+
+### Overview
+We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
+
+### Light-footed Ridgway's rail model
+The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the maximum height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios.  The modeling for the LFRR consisted of three steps:  1. Develop model to predict *S. foliosa* maximum height from marsh surface elevation, 2. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios, and 3. Predict habitat suitabilty for the LFRR in future years.   
+
+#### Model for *S. foliosa* maximum height
+To develop a model for maximum height of *S. foliosa* We used a zero inflated negative binomial model – the height was modeled with annual inundation during the summer month and annual inundation during the summer month squared, and the binomial was modeled with annual inundation during the summer month. This allowed us to first predict the presence or absence of *S. foliosa*, and if present, we predicted the maximum height.  To calucate inundation during the summer months, we used elevation data (NAVD88) collected with RTK-GPS at 1,037 points in a portion of the marsh in the winter of 2012 [@Thorne2018]. We subtracted hourly water level (NAVD88) recorded from a National Oceanic and Atmosphereic Association (NOAA) gague in 2012 from the elevation over the entire year.  Any time the subtraction yielded a negative number, it signified that that part of the marsh was submerged.  We then calcuated the percentage of the summer months (April - September) that that part of the marsh was submerged. We focused on the summer months because that is the growing season.  
+
+In addition to recording elevation, @Thorne2018 
+
+
+
+### Belding's savannah sparrow model
+The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.
+
+
+### Marsh surface modeling
 
 1.	Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modling could go 
 a.	Background
@@ -51,18 +70,7 @@ c.	Scenario analysis
 i.	SLR 
 ii.	sediment management 
 
-##Biological model
 
-##Overview
-We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
-
-## Light-footed Ridgway's rail model
-The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to perfer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the height of cordgrass as our indictor for the suitabilty of the salt marsh under the potential surface elevation scenarios predicted with Delft3D.  The modeling for the LFRR consisted of three steps: 1. calculate inudation of the marsh surface area, 2. predict *S. foliosa* maximum height from the inundation patterns, and 3. Predict habitat suitabilty for the LFRR.  
-
-
-
-##Belding's savannah sparrow model
-The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.
 
 
 
