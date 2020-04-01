@@ -42,7 +42,7 @@ Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi cha
 We used the scenario results from Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
 
 ### Light-footed Ridgway's rail model
-The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to prefer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the maximum height of cordgrass as our indicator for the suitability of the salt marsh under the potential surface elevation scenarios.  The modeling for the LFRR consisted of three steps:  1. Develop model to predict *S. foliosa* maximum height from marsh surface elevation, 2. Predict habitat suitability for the LFRR using the maximum height of *S.foliosa* , and 3. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.   
+The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to prefer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the maximum height of cordgrass as our indicator for the suitability of the salt marsh under the potential surface elevation scenarios.  The modeling for the LFRR consisted of three steps:  1. Develop model to predict *S. foliosa* maximum height from marsh surface elevation, 2. Predict habitat suitability for the LFRR using the maximum height of *S.foliosa*, and 3. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.   
 
 #### Model for *S. foliosa* maximum height
 <!--- I need to add in the method for interpolation that I used for the vegetation and for the elevation --->
@@ -90,7 +90,7 @@ Surveys for the BSS occur every five years and we used the results from the most
 
 ##### Marsh surface modeling
 
-1.	Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modeling could go 
+Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modeling could go 
 a.	Background
 b.	Technical details
 i.	Study domain
@@ -107,6 +107,16 @@ We applied both biological models to the future scenarios that were modeled usin
 
 Results
 ===========================================================
+
+
+Sfoliosa max model:
+
+```{r}
+load("C:/Users/JennyT/Documents/LitReview/UCI/working data/SPSP_MAX_model.rda")
+summary(mdl_sp_max) #need to make this into a nice table
+
+```
+
 
 1.	Spatial maps with scenarios - %inundation, S foliosa, LFRR suitability, BSS suitability
 
