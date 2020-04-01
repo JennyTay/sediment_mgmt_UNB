@@ -13,14 +13,15 @@ Abstract
 
 In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh species persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management.  We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.
 
-You add your reference in BibTeX format to the bib file, refs.bib. If you have mendeley or something similar, you can copy a reference over in the correct format. otherwise you need to do it your self.
-
+<!--- this is just some filler text, we need to work on it! --->
+<!--- also just fyi, this notation in the green text means its just a note, it doesn't print out in the final file--->
 
 
 
 Introduction
 ===============================================================
 
+<!--- we shoudl probably discuss the gap in the literature that this study fills.. probably some combination of the challenge of predicting marsh impacts due to all the drivers in urban watersheds, and the challenges of manageing for endangered species with an uncertain future --->
 
 
 
@@ -32,15 +33,13 @@ Methods
 ### Study region
 This study focused on a coastal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W).  The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including sub-tidal, mudflat, and salt marsh habitat.  This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.
 
-Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds. 
-
-<!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
+Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds.  <!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
 
 
 
 
 ### Overview
-We used the scenario results from the Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
+We used the scenario results from Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
 
 ### Light-footed Ridgway's rail model
 The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to prefer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the maximum height of cordgrass as our indicator for the suitability of the salt marsh under the potential surface elevation scenarios.  The modeling for the LFRR consisted of three steps:  1. Develop model to predict *S. foliosa* maximum height from marsh surface elevation, 2. Predict habitat suitability for the LFRR using the maximum height of *S.foliosa* , and 3. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.   
@@ -52,22 +51,39 @@ To develop a model for maximum height of *S. foliosa* we used a zero-inflated ne
 In addition to recording elevation in their 2012 survey, @Thorne2018 documented vegetation characteristics at a subset of the points they measured elevation, including: the heights and percent covers of each vegetation species.  we used the inundation metrics to model and predict the maximum height of *S. foliosa* using a zero-inflated model described above, and all the variables were significant at the P<0.001 level.  To predict with a zero inflated model, we used the model to predict a “response”, or a numerical value for the *S. foliosa* height, and a “zero” or a probability of the maximum height being zero (which is interpreted as no *S. foliosa* present).  If the probability of a zero was greater than 0.5, we assigned that value to be 0, and if it was less than 0.5, we assigned it to be 1. Then we multiplied the “response’ and the “zero” together such that the final value was 0 is the prob of 0 was >0.5 and it was a numerical height if the probability of zero was <0.5.  When using this model for prediction on the training data (2012), 5.8% that show *S.foliosa* presence when in fact there was no *S. foliosa* observed (a false positive), and 6.2% that show no *S. folida* when in fact it was observed (a false negative).<!--- 5.8 % is 14/240 and 6.2% is 15/240 ---> The model for *S. folisa* maximum height was applied to baseline years 2011-2018 using the NOAA water level data for the appropriate year and the elevation for the marsh surface calculated by subtracting or adding the average wetland accretion annual rate to the measured 2012 data. The average annual accretion rate was measured from surface elevation tables at Upper Newport Bay (Cite Karens Data, ask her how).  While we do not have *S. foliosa* maximum height for these other years to provide additional model validation, we will use the predicted maximum height to predict the habitat suitability for LFRR, which we can validate with annual LFRR surveys during those years.
 
 #### Habitat suitability
-
-##### Light-footed Ridgway's rail
 We modeled LFRR habitat suitability using measures of *S. foliosa* maximum height and LFRR occurrence. The maximum height of *S. folisa* was derived for the yeras 2011-2018 using the method described in the previous section.  The LFRR occurrence data was compiled from surveys conducted from the 2011 breeding season through the 2018 breeding season for Upper Newport Bay [@Zembal2016]. Briefly, the surveys employ ‘evening clappering’ call counts - the surveyor walks around the marsh at the start of breeding season and listens for LFRR calls from pairs vocally defending their nests or advertising for a mate.  If no calls are heard, a recording of a LFRR call is played to elicit a response from a pair who thinks their territory is being intruded upon.  The type of call indicates if the location is a nesting territory.  The location of the call is recorded on a marsh map.  The 2011-2018 LFRR survey maps were georeferenced using ArcGIS version 10.6 and a buffer was added surrounding each point to address uncertainty. <!--- add in supplement to explian how the buffer was added--->   
 
 We used RStudio to partition the area of Upper Newport Bay, subtidal through upper marsh habitat, into approximately 0.40ha plots, which represents the average area per LFRR nest (R. Zembal per. comm.).  Modeling at this scale prevents over predicting the carrying capacity of the marsh.  Each plot was assigned a percentage of years occupied, out of eight total years (2011-2018), depending on the number of years that a georeferenced LFRR survey point or buffer occurred within, or intsected, the plot. 
 
 We trained a logistic regression model with eight weights to predict the percentage of years (out of eight total) that a LFRR occupied a plot.  We used two measures of maximum *S. foliosa* height: The percentage of the plot with the maximum *S. foliosa* value greater than 60cm [@Zedler1993] and the 95th percentile value of the distribution of maximum *S.folisa* heights. To calculate these two measures, using the Raster package in R, we extracted all the predicted values for the maximum *S. foliosa* heights within each plot and then calculated either the perentage greater than 60cm or the 95th percentile. P-values were significant at the P<0.001 value and odds ratios were greater than one suggesting a postive effect on LFRR occupancy. 
 
+Model confidence is estimated by the upper and lower bounds of the 95% confidence interval for the predicted habitat suitabilty value using the following equation (i.e. the predited percentage of years that LFRR occupied a habitat).
+
+$$\text{SE}(logit(p)) = \sqrt{\text{SE}({\beta_0})^{2} + {x_1^{2}}\text{SE}({\beta_1})^2 + {x_2^{2}}\text{SE}({\beta_2})^2}   $$
+$$logit(p) \pm 1.96(\text{SE}(logit(p)))  $$
+
+```{r echo=FALSE}
+
+load("C:/Users/JennyT/Documents/LitReview/UCI/working data/mdl_pct_rail_pres.rda")
+#calculate the standard error of the predicted value ie SE(logit(P)) = sqrt((SE*B0^2)+(x^2*SE*B1^2)....)
+#the 95% CI is logit(P)+/-1.96(SE(logit(P)))
+#then we do the inverse logit to go from upper and lower bounds in log odds, to upper and lower bounds of probability
+
+b0_squared <- (summary(mdl_pct_rail_pres)$coefficients[1,1])^2
+b1_squared <- (summary(mdl_pct_rail_pres)$coefficients[2,1])^2
+b2_squared <- (summary(mdl_pct_rail_pres)$coefficients[3,1])^2
+SE0 <- summary(mdl_pct_rail_pres)$coefficients[1,2]
+SE1 <- summary(mdl_pct_rail_pres)$coefficients[2,2]
+SE1 <- summary(mdl_pct_rail_pres)$coefficients[3,2]
+```
 
 
-   
 
+### Belding's savannah sparrow model
+The Belding's savannah sparrow, *Passerculus sandwichensis beldingi* is a subspecies of savannah sparrow that nests in the upper marsh zone in southern California and is currently listed as a threatened species.  The sparrow nests on or near the ground underneath low growing plants in the upper marsh zone. They are commonly associated with *salicornia pacifica* however, the other low growing plants in the upper marsh zone are also frequenty used.  They build their nests above the elevation that gets inundated by the high tides in the Spring [@Massey1977].  The modeling for the BSS consisted of two steps:  1. Predict habitat suitability for the BSS using the inundation time during the Sprng and Summer and 2. predict habitat suitability in future years using marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.
 
-
-##### Belding's savannah sparrow model
-The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.
+#### Habitat suitability
+Surveys for the BSS occur every five years and we used the results from the most recent survey done in 2015 [@Zembal2015].  These surveys record the presence of territorial birds, which are identified with behaviors such as singing, aerial chases, and prolonged perching (see @Zembal2015 for full details).  
 
 
 #### Future predictions
@@ -85,6 +101,7 @@ i.	SLR
 ii.	sediment management 
 
 ##### Habitat suitability
+We applied both biological models to the future scenarios that were modeled using the Delft3D: Sea level rise of 0.39624m SLR (lower bound of the SLR for RCP 4.5 in 2100) and 1.09728m (higher bound of the SLR for RCP 8.5 in 2100), which encompasses the likely range for RCP 4.5 and 8.5 [@Griggs2017].  For each sea level rise scenarios, we modeled a scenario where dredging in the salt marsh continues as is, and a scenario where there is no dredging in the salt marsh. To calculate the percent of time inundated in the summer months nesessary to predict the maximum height of the *S. foliosa* we used water level data from the same NOAA gauge for the years 2011 and 2015, but we added the appropriate amount of sea level rise to each hourly water level value. The year 2011 represted a normal year and the year 2015 represented an el nino year.   
 
 
 

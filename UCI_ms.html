@@ -188,7 +188,6 @@ summary {
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
 <p>In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh species persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management. We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.</p>
-<p>You add your reference in BibTeX format to the bib file, refs.bib. If you have mendeley or something similar, you can copy a reference over in the correct format. otherwise you need to do it your self.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
@@ -221,11 +220,13 @@ summary {
 <p>We modeled LFRR habitat suitability using measures of <em>S. foliosa</em> maximum height and LFRR occurrence. The maximum height of <em>S. folisa</em> was derived for the yeras 2011-2018 using the method described in the previous section. The LFRR occurrence data was compiled from surveys conducted from the 2011 breeding season through the 2018 breeding season for Upper Newport Bay <span class="citation">(Zembal et al. 2016)</span>. Briefly, the surveys employ ‘evening clappering’ call counts - the surveyor walks around the marsh at the start of breeding season and listens for LFRR calls from pairs vocally defending their nests or advertising for a mate. If no calls are heard, a recording of a LFRR call is played to elicit a response from a pair who thinks their territory is being intruded upon. The type of call indicates if the location is a nesting territory. The location of the call is recorded on a marsh map. The 2011-2018 LFRR survey maps were georeferenced using ArcGIS version 10.6 and a buffer was added surrounding each point to address uncertainty. <!--- add in supplement to explian how the buffer was added---></p>
 <p>We used RStudio to partition the area of Upper Newport Bay, subtidal through upper marsh habitat, into approximately 0.40ha plots, which represents the average area per LFRR nest (R. Zembal per. comm.). Modeling at this scale prevents over predicting the carrying capacity of the marsh. Each plot was assigned a percentage of years occupied, out of eight total years (2011-2018), depending on the number of years that a georeferenced LFRR survey point or buffer occurred within, or intsected, the plot.</p>
 <p>We trained a logistic regression model with eight weights to predict the percentage of years (out of eight total) that a LFRR occupied a plot. We used two measures of maximum <em>S. foliosa</em> height: The percentage of the plot with the maximum <em>S. foliosa</em> value greater than 60cm <span class="citation">(Zedler 1993)</span> and the 95th percentile value of the distribution of maximum <em>S.folisa</em> heights. To calculate these two measures, using the Raster package in R, we extracted all the predicted values for the maximum <em>S. foliosa</em> heights within each plot and then calculated either the perentage greater than 60cm or the 95th percentile. P-values were significant at the P&lt;0.001 value and odds ratios were greater than one suggesting a postive effect on LFRR occupancy.</p>
-<p>We validated this habitat suitabilty model</p>
+<p>Model confidence is estimated by the upper and lower bounds of the 95% confidence interval for the predicted habitat suitabilty value using the following equation (i.e. the predited percentage of years that LFRR occupied a habitat).</p>
+<p><span class="math display">\[\text{SE}(logit(p)) = \sqrt{\text{SE}({\beta_0})^{2} + {x_1^{2}}\text{SE}({\beta_1})^2 + {x_2^{2}}\text{SE}({\beta_2})^2}   \]</span> <span class="math display">\[logit(p) \pm 1.96(\text{SE}(logit(p)))  \]</span></p>
 </div>
 <div id="beldings-savannah-sparrow-model" class="section level5">
 <h5>Belding’s savannah sparrow model</h5>
-<p>The BSS nests in the upper marsh zone, which experiences less daily inundation, and the vegetation is more diverse, therefore we modeled BSS habitat suitability directly from the Delft3D elevation predictions.</p>
+<p>The Belding’s savannah sparrow, <em>Passerculus sandwichensis beldingi</em> is a subspecies of savannah sparrow that nests in the upper marsh zone in southern California and is currently listed as a threatened species. The sparrow nests on or near the ground underneath low growing plants in the upper marsh zone. They are commonly associated with <em>salicornia pacifica</em> however, the other low growing plants in the upper marsh zone are also frequenty used. They build their nests above the elevation that gets inundated by the high tides in the Spring <span class="citation">(Massey 1977)</span>. We therefore modeled BSS habitat suitability directly from the percentage of time that the marsh is submerged during the summer months, with the same method described above.</p>
+<p>Surveys for the BSS occur every five years and we used the results from the most recent survey done in 2015 <span class="citation">(Zembal, Hoffman, and Patton 2015)</span>.</p>
 </div>
 </div>
 <div id="future-predictions" class="section level4">
@@ -250,6 +251,7 @@ summary {
 </div>
 <div id="habitat-suitability-1" class="section level5">
 <h5>Habitat suitability</h5>
+<p>We applied both biological models to the future scenarios that were modeled using the Delft3D: Sea level rise of 0.39624m SLR (lower bound of the SLR for RCP 4.5 in 2100) and 1.09728m (higher bound of the SLR for RCP 8.5 in 2100), which encompasses the likely range for RCP 4.5 and 8.5 <span class="citation">(Griggs et al. 2017)</span>. For each sea level rise scenarios, we modeled a scenario where dredging in the salt marsh continues as is, and a scenario where there is no dredging in the salt marsh. To calculate the percent of time inundated in the summer months nesessary to predict the maximum height of the <em>S. foliosa</em> we used water level data from the same NOAA gauge for the years 2011 and 2015, but we added the appropriate amount of sea level rise to each hourly water level value. The year 2011 represted a normal year and the year 2015 represented an el nino year.</p>
 </div>
 </div>
 </div>
@@ -275,8 +277,14 @@ summary {
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references">
+<div id="ref-Griggs2017">
+<p>Griggs, G, J Árvai, D Cayan, R DeConto, J Fox, HA Fricker, RE Kopp, C Tebaldi, and EA Whiteman. 2017. “(California Ocean Protection Council Science Advisory Team Working Group). Rising Seas in California: An Update on Sea-Level Rise Science. California Ocean Science Trust,” April. California Ocean Protection Council. <a href="http://www.opc.ca.gov/webmaster/ftp/pdf/docs/rising-seas-in-california-an-update-on-sea-level-rise-science.pdf" class="uri">http://www.opc.ca.gov/webmaster/ftp/pdf/docs/rising-seas-in-california-an-update-on-sea-level-rise-science.pdf</a>.</p>
+</div>
 <div id="ref-Maley2013">
 <p>Maley, James M., and Robb T. Brumfield. 2013. “Mitochondrial and Next-Generation Sequence Data Used to Infer Phylogenetic Relationships and Species Limits in the Clapper/King Rail Complex.” <em>The Condor</em> 115 (2): 316–29. doi:<a href="https://doi.org/10.1525/cond.2013.110138">10.1525/cond.2013.110138</a>.</p>
+</div>
+<div id="ref-Massey1977">
+<p>Massey, Barbara W. 1977. “A Census of the Breeding Population of the Belding’s Savannah Sparrow in California.” California Department of Fish; Game.</p>
 </div>
 <div id="ref-Massey1984">
 <p>Massey, Barbara W., Richard Zembal, and P. D. Jorgensen. 1984. “Nesting Habitat of the Light-Footed Clapper Rail in Southern California.” <em>Journal of Field Ornithology</em> 55 (1): 67–80. <a href="http://www.jstor.org/stable/4512858" class="uri">http://www.jstor.org/stable/4512858</a>.</p>
@@ -295,6 +303,9 @@ summary {
 </div>
 <div id="ref-Zembal1988">
 <p>Zembal, Richard, and Jack M. Fancher. 1988. “Foraging behavior and foods of the light-footed clapper rail.” <em>Condor</em> 90 (4): 959–62. doi:<a href="https://doi.org/10.2307/1368864">10.2307/1368864</a>.</p>
+</div>
+<div id="ref-Zembal2015">
+<p>Zembal, Richard, Susan M Hoffman, and Robert T Patton. 2015. “A survey of the Belding’s savannah sparrow (Passerculus sandwichensis beldingi) in California, 2015.” State of California. Natural Resources Agency, Department of Fish; Wildlife Wildlife Branch.</p>
 </div>
 <div id="ref-Zembal2016">
 <p>Zembal, Richard, Susan M. Hoffman, Charles Gailband, and John Konecny. 2016. “Light-footed Ridgway’s (Clapper) Rail Management, Study, and Zoological Breeding in California 2016 Season.” Sacramento, CA: California Department of Fish; Wildlife, Wildlife Branch, Nongame Wildlife Program Report, 2016-04.</p>
