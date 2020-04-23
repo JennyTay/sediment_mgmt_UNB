@@ -23,6 +23,7 @@ Introduction
 
 <!--- we shoudl probably discuss the gap in the literature that this study fills.. probably some combination of the challenge of predicting marsh impacts due to all the drivers in urban watersheds, and the challenges of manageing for endangered species with an uncertain future --->
 
+High resolution dynamic coastal modeling leads to better conservation planning [@Runting2013] 
 
 
 
