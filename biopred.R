@@ -1548,34 +1548,34 @@ ggplot(data = bss_pt_fullmarsh, mapping = aes(x = as.factor(spar_num_pairs), y =
 #Future years
 
  
-inun_metrics_2100_dre_RCP8_elnino  <- stack("_2100_dredge_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2100_dre_RCP8_elnino  <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_dredge_RCP8_elnino_inun_metrics_.grd")
 bss_predict_2100_dre_RCP8_elnino <- raster::predict(object = inun_metrics_2100_dre_RCP8_elnino, bss_mdl, type = "response")
 plot(bss_predict_2100_dre_RCP8_elnino)
 
-inun_metrics_2100_dre_RCP8_normal <- stack("_2100_dredge_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2100_dre_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_dredge_RCP8_normal_inun_metrics_.grd")
 bss_predict_2100_dre_RCP8_normal <- raster::predict(object = inun_metrics_2100_dre_RCP8_normal, bss_mdl, type = "response")
 plot(bss_predict_2100_dre_RCP8_normal)
 
-inun_metrics_2100_dre_RCP4_elnino <- stack("_2100_dredge_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2100_dre_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_dredge_RCP4_elnino_inun_metrics_.grd")
 bss_predict_2100_dre_RCP4_elnino <- raster::predict(object = inun_metrics_2100_dre_RCP4_elnino, bss_mdl, type = "response")
 plot(bss_predict_2100_dre_RCP4_elnino)
 
-inun_metrics_2100_dre_RCP4_normal <- stack("_2100_dredge_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2100_dre_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_dredge_RCP4_normal_inun_metrics_.grd")
 bss_predict_2100_dre_RCP4_normal <- raster::predict(object = inun_metrics_2100_dre_RCP4_normal, bss_mdl, type = "response")
 plot(bss_predict_2100_dre_RCP4_normal)
 
-inun_metrics_2100_ND_RCP8_elnino <- stack("_2100_ND_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP8_elnino_inun_metrics_.grd")
 bss_predict_2100_ND_RCP8_elnino <- raster::predict(object = inun_metrics_2100_ND_RCP8_elnino, bss_mdl, type = "response")
 plot(bss_predict_2100_ND_RCP8_elnino)
 
-inun_metrics_2100_ND_RCP8_normal <- stack("_2100_ND_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP8_normal_inun_metrics_.grd")
 bss_predict_2100_ND_RCP8_normal <- raster::predict(object = inun_metrics_2100_ND_RCP8_normal, bss_mdl, type = "response")
 plot(bss_predict_2100_ND_RCP8_normal)
 
-inun_metrics_2100_ND_RCP4_elnino <- stack("_2100_ND_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP4_elnino_inun_metrics_.grd")
 bss_predict_2100_ND_RCP4_elnino <- raster::predict(object = inun_metrics_2100_ND_RCP4_elnino, bss_mdl, type = "response")
 plot(bss_predict_2100_ND_RCP4_elnino)
 
-inun_metrics_2100_ND_RCP4_normal <- stack("_2100_ND_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP4_normal_inun_metrics_.grd")
 bss_predict_2100_ND_RCP4_normal <- raster::predict(object = inun_metrics_2100_ND_RCP4_normal, bss_mdl, type = "response")
 plot(bss_predict_2100_ND_RCP4_normal)
