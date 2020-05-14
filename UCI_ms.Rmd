@@ -110,7 +110,7 @@ Results
 ===========================================================
 
 
-Sfoliosa max model:
+<!--- Present results for the different models used. This is S. foliosa max model, and probability of occurrence for the LFRR  --->
 
 ```{r}
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/SPSP_MAX_model.rda")
@@ -119,7 +119,10 @@ summary(mdl_sp_max) #need to make this into a nice table
 ```
 
 
-1.	Spatial maps with scenarios - %inundation, S foliosa, LFRR suitability, BSS suitability
+<!--- Spatial maps of %inundation, S foliosa, LFRR suitability, BSS suitability with 2 scenarios, 
+1. RCP8, 2100, el nino, dredging as the most likely to be submerged but the business as usual
+2. RCP4, 2100, normal, no dreding as the most sediment  --->
+
 
 2.	Stacked bar chart comparing habitat outcomes under the different scenarios
 a.	Elevation zones, vegetation zones, suitability zones

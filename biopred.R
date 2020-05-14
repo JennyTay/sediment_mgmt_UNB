@@ -397,31 +397,31 @@ elv_m_2015_baseline <- crop(elv_m_2015_baseline, extent) #crop to marsh extent
 
 #Future Predictions: 2050
 
-#for prediction: future elevation with dredging, 0.179m SLR, elevation is in MSL
+#dredging, 0.179m SLR, elevation is in MSL
 elv_m_2050_dre_RCP4 <- crop(raster("RCP4_dredging_2050/Bed_Level_2050.TIF"), extent)
 
-#for prediction: future elevation with dredging, 0.2911m  SLR, elevation is in MSL
+#dredging, 0.2911m  SLR, elevation is in MSL
 elv_m_2050_dre_RCP8 <- crop(raster("RCP8_2050_dredging/RCP8_2050_dredging.TIF"), extent)
 
-#for prediction: future elevation withOUT dredging, 0.179m SLR, elevation is in MSL
+#No dredging, 0.179m SLR, elevation is in MSL
 elv_m_2050_ND_RCP4 <- crop(raster("RCP4_no_dredging_2050/RCP4_no_dredging_2050.TIF"),extent)
 
-#for prediction: future elevation withOUT dredging, 0.2911m  SLR, elevation is in MSL
+#No dredging, 0.2911m  SLR, elevation is in MSL
 elv_m_2050_ND_RCP8 <- crop(raster("RCP8_2050_no_dredging/RCP8_2050_no_dredging.TIF"), extent)
 
 
 #Future Predictions: 2100
 
-#for prediction: future elevation with dredging, 0.39624m SLR, elevation is in MSL
+#dredging, 0.39624m SLR, elevation is in MSL
 elv_m_2100_dre_RCP4 
 
-#for prediction: future elevation with dredging, 1.09728m  SLR, elevation is in MSL
+#dredging, 1.09728m  SLR, elevation is in MSL
 elv_m_2100_dre_RCP8
 
-#for prediction: future elevation withOUT dredging, 0.39624m SLR, elevation is in MSL
+#No dredging, 0.39624m SLR, elevation is in MSL
 elv_m_2100_ND_RCP4 
 
-#for prediction: future elevation withOUT dredging, 1.09728m  SLR, elevation is in MSL
+#No dredging, 1.09728m  SLR, elevation is in MSL
 elv_m_2100_ND_RCP8 <- crop(raster("RCP8_2100_no_dredging/BL_2100.TIF"), extent)
 
 
@@ -1372,15 +1372,15 @@ bss_dat <- left_join(UNB, bss_dat, by = "UID")
 plot(bss_dat["spar_num_pairs"], main = "BSS Occupancy (2015)", key.pos = 1, 
      key.width = lcm(1.3), key.length = 0.5)
 
-#crop the bird data to be just where veg data is
-veg_boundary <- st_read("C:/Users/JennyT/Documents/LitReview/UCI/working data/UNB Vegetation/Veg_boundary.shp")
-veg_boundary <- as(veg_boundary, "Spatial") #veg boundary convert to spatial object
-bird_dat_sp <- as(bss_dat, "Spatial")#convert bird object to spatial for cropping
-veg_boundary <- spTransform(veg_boundary, CRSobj = crs(bird_dat_sp))
-bird_dat_sp <- raster::intersect(veg_boundary, bird_dat_sp ) #crop to extent
-plot(bird_dat_sp)
-bss_dat <- st_as_sf(bird_dat_sp)
-plot(bss_dat["spar_num_pairs"])
+# #crop the bird data to be just where veg data is
+# veg_boundary <- st_read("C:/Users/JennyT/Documents/LitReview/UCI/working data/UNB Vegetation/Veg_boundary.shp")
+# veg_boundary <- as(veg_boundary, "Spatial") #veg boundary convert to spatial object
+# bird_dat_sp <- as(bss_dat, "Spatial")#convert bird object to spatial for cropping
+# veg_boundary <- spTransform(veg_boundary, CRSobj = crs(bird_dat_sp))
+# bird_dat_sp <- raster::intersect(veg_boundary, bird_dat_sp ) #crop to extent
+# plot(bird_dat_sp)
+# bss_dat <- st_as_sf(bird_dat_sp)
+# plot(bss_dat["spar_num_pairs"])
 
 #in the plots with zero BSS, make a point with zero
 
@@ -1446,13 +1446,14 @@ nintyfifthpercentile <- function(x,...){
   d <- quantile(x, probs = 0.95, na.rm = TRUE)
   return(d)
 }
-ninyfifthperc_summ_inu__pct_15 <- focal(summ_inu_pct_15, w = fw_50m, fun = nintyfifthpercentile, na.rm = TRUE)
+ninyfifthperc_summ_inu__pct_15 <- focal(summ_inu_pct_15, w = fw_5m, fun = nintyfifthpercentile, na.rm = TRUE)
 
 
 dat <- cbind(bss_pt, raster::extract(x = mean_summ_inu_pct_15, y = bss_pt))
 dat <- cbind(dat, raster::extract(x = ninyfifthperc_summ_inu__pct_15, y = bss_pt))
 dat <- cbind(dat, raster::extract(x = summ_inu_pct_15, y = bss_pt))
 names(dat)[5:7] <-c("mean_summ_inu_pct", "ntyfth_summ_inu_pct", "summ_inu_pct")
+
 
 ggplot(data = dat, mapping = aes(x = ntyfth_summ_inu_pct, fill = as.factor(spar_num_pairs)))+
   geom_histogram(position = "stack")
@@ -1485,6 +1486,11 @@ bss_pval <- bss_pval[order(bss_pval$pval),]
 
 summary(bss_mdl <- glm(data = dat, family = "binomial", spar_num_pairs ~ mean_summ_inu_pct))
 save(bss_mdl, file = "C:/Users/JennyT/Documents/LitReview/UCI/working data/bss_mdl.rda")
+
+ggplot(data = dat, mapping = aes(x = mean_summ_inu_pct, y = spar_num_pairs))+
+  geom_smooth(method = "glm", 
+              method.args = list(family = "binomial"))+
+  geom_point(alpha = 0.2)
 
 
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/bss_mdl.rda")
@@ -1542,7 +1548,8 @@ load("C:/Users/JennyT/Documents/LitReview/UCI/working data/bss_pt_fullmarsh.RDat
 bss_pt_fullmarsh <- st_transform(bss_pt_fullmarsh, crs = crs(bss_predict_2015_delft3D))
 crs(bss_pt_fullmarsh)
 bss_pt_fullmarsh <- cbind(bss_pt_fullmarsh, raster::extract(x = bss_predict_2015_delft3D, y = bss_pt_fullmarsh))
-ggplot(data = bss_pt_fullmarsh, mapping = aes(x = as.factor(spar_num_pairs), y = raster..extract.x...bss_predict_2015_delft3D..y...bss_pt_fullmarsh.))+
+names(bss_pt_fullmarsh)[5] <- "Predicted_Prob"
+ggplot(data = bss_pt_fullmarsh, mapping = aes(x = as.factor(spar_num_pairs), y = Predicted_Prob))+
   geom_boxplot()
 
 #Future years
@@ -1565,6 +1572,8 @@ bss_predict_2100_dre_RCP4_normal <- raster::predict(object = inun_metrics_2100_d
 plot(bss_predict_2100_dre_RCP4_normal)
 
 inun_metrics_2100_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP8_elnino_inun_metrics_.grd")
+values(inun_metrics_2100_ND_RCP8_elnino$summ_inu_pct) <- ifelse(values(inun_metrics_2100_ND_RCP8_elnino$summ_inu_pct>0.292122), NA, values(inun_metrics_2100_ND_RCP8_elnino$summ_inu_pct))
+inun_metrics_2100_ND_RCP8_elnino <- mean_summ_inun_perc_function(inun_metrics_2100_ND_RCP8_elnino)
 bss_predict_2100_ND_RCP8_elnino <- raster::predict(object = inun_metrics_2100_ND_RCP8_elnino, bss_mdl, type = "response")
 plot(bss_predict_2100_ND_RCP8_elnino)
 
