@@ -1,8 +1,11 @@
 ---
-title: "The potential for sediment management to ameliorate the impacts of sea level rise in coastal salt marsh habitats"
+title: Modeling the potential for sediment management to ameliorate the impacts of sea level
+  rise in coastal salt marsh habitats
 author: "Jenny Rogers and Matt Brand"
 date: "March 29, 2020"
-output: html_document
+output:
+  html_document: default
+  word_document: default
 bibliography: refs.bib
 ---
 
@@ -11,19 +14,33 @@ bibliography: refs.bib
 Abstract
 ===============================================================
 
-In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh species persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management.  We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA which has high importance biologically and recreationally due to the massive loss of this type of habitat in the region, and highly managed sediment in the watershed and bay.
+In urban watersheds innovative sediment management approaches have the potential to reduce costs and increase efficiency in the operations of local agencies, and help ensure salt marsh species persistence.Future uncertainty in SLR, complex marsh dynamics, and competing habitats in the marsh make it challenging to evaluate the effectiveness of management scenarios. Here, we demonstrate a series of modeling approaches that can be applied to investigate physical changes to marshes as a result of SLR and sediment management.  We then predict the biological changes driven by the physical changes. We apply the approach at a salt marsh is southern CA, which has high importance biologically and recreationally, and experiences highly managed sediment in the watershed and bay.
 
 <!--- this is just some filler text, we need to work on it! --->
-<!--- also just fyi, this notation in the green text means its just a note, it doesn't print out in the final file--->
 
+
+Keywords
+===============================================================
+Sea level rise, coastal salt marsh, Delft 3D, habitat suitability, sediment management, Ridgway's rail, Belding's savannah sparrow
+
+
+Acknowledgments
+==============================================================
+This work was funded by the National Oceanic and Atmospheric Association (NOAA) Ecological Effects of Sea Level Rise program <!--- funding number--->.  We thank Dick Zembal from Orange county water district for his maps showing the annual locations of breeding Light-footed Ridgway’s rails. We thank Amber Jolly and Kyle Zolkin for the many hours they spent helping to georeference and digitize 8 years of survey data.  We thank Karen Thorne from the USGS Western Ecological Research Center for her elevation and vegetation data from surveys in Upper Newport Bay.  Lastly, we thank all the individuals who have participated in the Ridgway’s rail and Belding's savannah surveys at salt marshes in southern California.
+<!--- did I miss anyone?? anyone who helped you with delft? --->
 
 
 Introduction
 ===============================================================
 
-<!--- we shoudl probably discuss the gap in the literature that this study fills.. probably some combination of the challenge of predicting marsh impacts due to all the drivers in urban watersheds, and the challenges of manageing for endangered species with an uncertain future --->
+<!---  some ideas for 'gaps' we are filling:
+1. challenge of predicting marsh impacts of SLR due to all the natural and anthropogenic drivers in urban watersheds, 
+2. challenges of managing for endangered species with an uncertain future
+3. need to evaluate new methods of marsh management for SLR (like sediment mgmt) when options like habitat transgression are not possible
+4.  need to reevaluate management requirements (like sediment mgmt) under climate change--->
 
-High resolution dynamic coastal modeling leads to better conservation planning [@Runting2013] 
+
+High resolution dynamic coastal modeling leads to better conservation planning [@Runting2013]. 
 
 
 
@@ -32,15 +49,13 @@ Methods
 ===============================================================
 
 ### Study region
-This study focused on a coastal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W).  The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including sub-tidal, mudflat, and salt marsh habitat.  This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.
+This study focused on a coastal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W), which experiences a Mediterranean climate.  The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including sub-tidal, mudflat, and salt marsh habitat.  The upper bay supports non-motorized recreation and lots of wildlife including migratory birds.  This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.  Additionally, it supports a large population of Belding's savannah sparrow, a threatened salt marsh bird.  The upper bay is surrounded by steep bluffs, which make marsh transgression not possible.  Instead, the marsh will rely on accretion only to keep pace with sea level rise.
 
 Two rivers empty into the upper bay: San Diego Creek and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds.  <!--- Matt, would this be a good section to add in some information on the dredging and maintanence of the watersheds and the dredging of the bay... or do you think that woudl be better in the Delft3D seciton? --->
 
 
-
-
 ### Overview
-We used the scenario results from Delft3D modeling to make predictions for suitability for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS).  
+Habitat suitability models were developed for two salt marsh obligate species, the Light-footed Ridgways's rail *Rallus obsoletus* (LFRR), and the Belding's savannah sparrow *Passerculus sandwichensis beldingi* (BSS) using marsh surface elevation and vegetaion.  We used Delft3D modeling to predict marsh surface elevation  in 2050 and 2100 using two different sea level rise scenarios (associated with two different RCPs) and two different marsh dredging scenarios.  We used the scenario results from Delft3D modeling to make predictions for suitability for the two birds under the different sea leverl rise and sediment management system.   
 
 ### Light-footed Ridgway's rail model
 The LFRR is a sub-species of Ridgway's rail endemic to salt marshes in southern California and northern Mexico, which has only recently been identified as a separate species from the Clapper rail [@Maley2013]. While nest sites have been observed in different vegetation settings, generally the LFRR is known to prefer tall cordgrass (*Spartina foliosa*) for nesting and foraging [@Zedler1993, @Zembal1988, @Massey1984]. We therefore used the maximum height of cordgrass as our indicator for the suitability of the salt marsh under the potential surface elevation scenarios.  The modeling for the LFRR consisted of three steps:  1. Develop model to predict *S. foliosa* maximum height from marsh surface elevation, 2. Predict habitat suitability for the LFRR using the maximum height of *S.foliosa*, and 3. Use marsh surface modeling to predict the surface elevation under different sea level rise and sediment management scenarios.   
@@ -87,19 +102,19 @@ The Belding's savannah sparrow, *Passerculus sandwichensis beldingi* is a subspe
 Surveys for the BSS occur every five years and we used the results from the most recent survey done in 2015 [@Zembal2015].  These surveys record the presence of territorial birds, which are identified with behaviors such as singing, aerial chases, and prolonged perching (see @Zembal2015 for full details).  
 
 
+
+
 #### Future predictions
+
+
 
 ##### Marsh surface modeling
 
-Matt section - I just filled in some general text here, but in general I thought this is where the Delft3D modeling could go 
-a.	Background
-b.	Technical details
-i.	Study domain
-ii.	Calibration
-iii.	Validation 
-c.	Scenario analysis
-i.	SLR 
-ii.	sediment management 
+<!---Delft 3D section ---> 
+
+
+
+
 
 ##### Habitat suitability
 We applied both biological models to the future scenarios that were modeled using the Delft3D: Sea level rise of 0.39624m SLR (lower bound of the SLR for RCP 4.5 in 2100) and 1.09728m (higher bound of the SLR for RCP 8.5 in 2100), which encompasses the likely range for RCP 4.5 and 8.5 [@Griggs2017].  For each sea level rise scenarios, we modeled a scenario where dredging in the salt marsh continues as is, and a scenario where there is no dredging in the salt marsh. To calculate the percent of time inundated in the summer months nesessary to predict the maximum height of the *S. foliosa* we used water level data from the same NOAA gauge for the years 2011 and 2015, but we added the appropriate amount of sea level rise to each hourly water level value. The year 2011 represted a normal year and the year 2015 represented an el nino year.   
@@ -110,7 +125,7 @@ Results
 ===========================================================
 
 
-<!--- Present results for the different models used. This is S. foliosa max model, and probability of occurrence for the LFRR  --->
+<!---  results for the models used, S. foliosa max model, and probability of occurrence for the LFRR  --->
 
 ```{r}
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/SPSP_MAX_model.rda")
