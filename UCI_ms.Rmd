@@ -4,8 +4,8 @@ title: Modeling the potential for sediment management to ameliorate the impacts 
 author: "Jenny Rogers and Matt Brand"
 date: "March 29, 2020"
 output:
-  html_document: default
   word_document: default
+  html_document: default
 bibliography: refs.bib
 ---
 
@@ -55,7 +55,7 @@ Methods
 ### Study region
 This study focused on a coastal salt marsh in Southern California, Upper Newport Bay (33.6463°N, -117.8862°W), which experiences a Mediterranean climate.  The lower portion of the bay is dredged and managed as a recreational harbor. The upper part of the bay - the focus of this study - is managed as an ecological reserve by the California Department of Fish and Wildlife and has approximately 752 acres of land including sub-tidal, mudflat, and salt marsh habitat.  The upper bay supports non-motorized recreation and lots of wildlife including migratory birds.  This reserve is particularly important because for the past few decades it has supported the largest population of the LFRR, which is an endangered species and endemic to the region.  Additionally, it supports a large population of Belding's savannah sparrow, a threatened salt marsh bird.  The upper bay is surrounded by steep bluffs, which make marsh transgression not possible.  Instead, the marsh will rely on accretion only to keep pace with sea level rise.
 
-Two rivers empty into the upper bay: San Diego Creek (SDC) and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds. The Santa Ana Delhi channel does not contribute a significant proportion of sediment due to its heavily urbanized upstream watershed. Historically, excessive sedimentation from SDC was the greatest driver of habitat change in Newport Bay, threatening to turn protected wetlands into upland habitat [@Trimble1997]. As a result, a sediment total maximum daily load (TMDL) for SDC was implemented, stipulating a 50% reduction in overall sediment loads in addition to maintaining a minimum depth of 2.1 meters below MSL for subtidal habitat in Upper Newport Bay (UNB) [@sedTMDLNB2014]. Upstream, extensive channel armoring and sediment detention basins have been sucessfull in reducing the overall sediment loads into Newport Bay by at least 50% [cite sedTMDLNB2018].
+Two rivers empty into the upper bay: San Diego Creek (SDC) and the Santa Ana Delhi channel, both of which drain heavily urbanized watersheds. The Santa Ana Delhi channel does not contribute a significant proportion of sediment due to its heavily urbanized upstream watershed. Historically, excessive sedimentation from SDC was the greatest driver of habitat change in Newport Bay, threatening to turn protected wetlands into upland habitat [@trimble1997]. As a result, a sediment total maximum daily load (TMDL) for SDC was implemented, stipulating a 50% reduction in overall sediment loads in addition to maintaining a minimum depth of 2.1 meters below MSL for subtidal habitat in Upper Newport Bay (UNB) [@sedTMDLNB2014]. Upstream, extensive channel armoring and sediment detention basins have been sucessfull in reducing the overall sediment loads into Newport Bay by at least 50% [cite sedTMDLNB2018].
 
 Downstream of SDC, Newport Bay contains two sediment capture basins constructed in 2010 at a cost of $37 million dollars as part of the sediment TMDL with estimated lifespans of 20 years [@ACOE2011]. These basins capture excessive upstream sediment generated from the watershed and channel. The basins are also meant to protect subtidal habitat and must be periodically dredged when they fill to above 2.1 meters below MSL. When this "trigger point" is reached, the TMDL stipulates that the basins are dredged to their original depths at 6.65 meters below MSL. 
 
