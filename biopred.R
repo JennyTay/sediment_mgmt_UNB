@@ -413,13 +413,13 @@ elv_m_2050_ND_RCP8 <- crop(raster("RCP8_2050_no_dredging/RCP8_2050_no_dredging.T
 #Future Predictions: 2100
 
 #dredging, 0.39624m SLR, elevation is in MSL
-elv_m_2100_dre_RCP4 
+elv_m_2100_dre_RCP4 <- crop(raster("RCP4_dredging_2100/RCP4_dredging_2100.TIF"), extent)
 
 #dredging, 1.09728m  SLR, elevation is in MSL
-elv_m_2100_dre_RCP8
+elv_m_2100_dre_RCP8 <- crop(raster("RCP8_2100_dredging/RCP8_2100_dredging.TIF"), extent)
 
 #No dredging, 0.39624m SLR, elevation is in MSL
-elv_m_2100_ND_RCP4 
+elv_m_2100_ND_RCP4 <- crop(raster("RCP4_no_dredging_2100/RCP4_2100_no_dredging.TIF"), extent)
 
 #No dredging, 1.09728m  SLR, elevation is in MSL
 elv_m_2100_ND_RCP8 <- crop(raster("RCP8_2100_no_dredging/BL_2100.TIF"), extent)
@@ -879,21 +879,21 @@ sp_max_2100_dre_RCP4_elnino <- spsp_predict(rasterstack = inun_metrics_2100_dre_
 inun_metrics_2100_dre_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_dredge_RCP4_normal_inun_metrics_.grd")
 sp_max_2100_dre_RCP4_normal <- spsp_predict(rasterstack = inun_metrics_2100_dre_RCP4_normal)
 
-inun_metrics_2100_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_nodredge_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP8_elnino_inun_metrics_.grd")
 sp_max_2100_ND_RCP8_elnino <- spsp_predict(rasterstack = inun_metrics_2100_ND_RCP8_elnino)
 
-inun_metrics_2100_ND_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_nodredge_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP8_normal_inun_metrics_.grd")
 sp_max_2100_ND_RCP8_normal <- spsp_predict(rasterstack = inun_metrics_2100_ND_RCP8_normal)
 
-inun_metrics_2100_ND_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_nodredge_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP4_elnino_inun_metrics_.grd")
 sp_max_2100_ND_RCP4_elnino <- spsp_predict(rasterstack = inun_metrics_2100_ND_RCP4_elnino)
 
-inun_metrics_2100_ND_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_nodredge_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2100_ND_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2100_ND_RCP4_normal_inun_metrics_.grd")
 sp_max_2100_ND_RCP4_normal <- spsp_predict(rasterstack = inun_metrics_2100_ND_RCP4_normal)
 
 
 #Future year, 2050
-inun_metrics_2050_dre_RCP8_elnino  <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_22050_dredge_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2050_dre_RCP8_elnino  <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_elnino_inun_metrics_.grd")
 sp_max_2050_dre_RCP8_elnino <- spsp_predict(rasterstack = inun_metrics_2050_dre_RCP8_elnino)
 
 inun_metrics_2050_dre_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_normal_inun_metrics_.grd")
@@ -905,16 +905,16 @@ sp_max_2050_dre_RCP4_elnino <- spsp_predict(rasterstack = inun_metrics_2050_dre_
 inun_metrics_2050_dre_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP4_normal_inun_metrics_.grd")
 sp_max_2050_dre_RCP4_normal <- spsp_predict(rasterstack = inun_metrics_2050_dre_RCP4_normal)
 
-inun_metrics_2050_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_nodredge_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2050_ND_RCP8_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_elnino_inun_metrics_.grd")
 sp_max_2050_ND_RCP8_elnino <- spsp_predict(rasterstack = inun_metrics_2050_ND_RCP8_elnino)
 
-inun_metrics_2050_ND_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_nodredge_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2050_ND_RCP8_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_normal_inun_metrics_.grd")
 sp_max_2050_ND_RCP8_normal <- spsp_predict(rasterstack = inun_metrics_2050_ND_RCP8_normal)
 
-inun_metrics_2050_ND_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_nodredge_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2050_ND_RCP4_elnino <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_elnino_inun_metrics_.grd")
 sp_max_2050_ND_RCP4_elnino <- spsp_predict(rasterstack = inun_metrics_2050_ND_RCP4_elnino)
 
-inun_metrics_2050_ND_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_nodredge_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2050_ND_RCP4_normal <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_normal_inun_metrics_.grd")
 sp_max_2050_ND_RCP4_normal <- spsp_predict(rasterstack = inun_metrics_2050_ND_RCP4_normal)
 
 
@@ -938,7 +938,7 @@ names(sp_max_stack_fut) <- c("sp_max_2100_dre_RCP8_elnino", "sp_max_2100_dre_RCP
                              "sp_max_2050_ND_RCP8_elnino", "sp_max_2050_ND_RCP8_normal",
                              "sp_max_2050_ND_RCP4_elnino", "sp_max_2050_ND_RCP4_normal") 
 
-writeRaster(sp_max_stack_fut, "C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd", format = "raster")
+writeRaster(sp_max_stack_fut, "C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd", format = "raster", overwrite = TRUE)
 sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd")
 
 t <- data.frame(cellStats(sp_max_stack_fut, quantile))
@@ -948,12 +948,17 @@ library(rasterVis)
 cols <- colorRampPalette(brewer.pal(9,"YlGn"))
 png("sp_max_stack_fut.png", res = 300)
 #plot all 8 combinations
-print(rasterVis::levelplot(sp_max_stack_fut, names.attr = c("Dredge 1m EN",  "Dredge 1m", "Dredge 0.5m EN",  
-                                                            "Dredge 0.5m", "No Dredge 1m EN" , "No Dredge 1m",  
-                                                            "No Dredge 0.5m EN", "No Dredge 0.5m"),
+print(rasterVis::levelplot(sp_max_stack_fut, names.attr = c("2100_dre_RCP8_elnino", "2100_dre_RCP8_normal", 
+                                                            "2100_dre_RCP4_elnino", "2100_dre_RCP4_normal", 
+                                                            "2100_ND_RCP8_elnino", "2100_ND_RCP8_normal",
+                                                            "2100_ND_RCP4_elnino", "2100_ND_RCP4_normal",
+                                                            "2050_dre_RCP8_elnino", "2050_dre_RCP8_normal", 
+                                                            "2050_dre_RCP4_elnino", "2050_dre_RCP4_normal", 
+                                                            "2050_ND_RCP8_elnino", "2050_ND_RCP8_normal",
+                                                            "2050_ND_RCP4_elnino", "2050_ND_RCP4_normal"),
                            col.regions=cols,
                            scales=list(draw=FALSE),
-                           layout=c(4, 2)))#remove axis ticks
+                           layout=c(4, 4)))#remove axis ticks
 dev.off()
 
 #plot just 4 combinations 
