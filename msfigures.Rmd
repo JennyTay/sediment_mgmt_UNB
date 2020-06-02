@@ -1,0 +1,39 @@
+---
+title: "msfigures"
+author: "Jenny Rogers"
+date: "June 2, 2020"
+output: html_document
+---
+
+manuscript figures
+spatial maps of
+%inundation in the summer
+Spartina height
+probability of RR occurrence
+
+Tables:
+summary stats for %inundation in summer, spartina height, probability of RR occurrence for each scenario
+
+
+Here we read in the future percent summer inundation values
+
+```{r}
+
+perc_summ_inund_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd")
+
+
+```
+
+
+Here we read in the future spartina heights
+```{r}
+sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd")
+
+```
+
+here we read in the future rail predictions
+```{r}
+
+railpred <- load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
+
+```

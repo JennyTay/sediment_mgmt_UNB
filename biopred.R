@@ -798,6 +798,7 @@ inun_metrics_2050_nodredge_RCP4_normal <- writeRaster(inun_metrics_2050_nodredge
 
 
 
+
 # read in models for the veg prediction
 #SPSP_MAX
 load(file = "SPSP_MAX_model.rda")
@@ -919,7 +920,33 @@ sp_max_2050_ND_RCP4_normal <- spsp_predict(rasterstack = inun_metrics_2050_ND_RC
 
 
 
+#make stack of the %summer inundation
+perc_summ_inund_fut <- stack(inun_metrics_2050_ND_RCP4_normal[[6]], inun_metrics_2050_ND_RCP4_elnino[[6]],
+                             inun_metrics_2050_ND_RCP8_normal[[6]], inun_metrics_2050_ND_RCP8_elnino[[6]],
+                             inun_metrics_2050_dre_RCP4_normal[[6]], inun_metrics_2050_dre_RCP4_elnino[[6]],
+                             inun_metrics_2050_dre_RCP8_normal[[6]], inun_metrics_2050_dre_RCP8_elnino[[6]],
+                             inun_metrics_2100_ND_RCP4_normal[[6]], inun_metrics_2100_ND_RCP4_elnino[[6]],
+                             inun_metrics_2100_ND_RCP8_normal[[6]], inun_metrics_2100_ND_RCP8_elnino[[6]],
+                             inun_metrics_2100_dre_RCP4_normal[[6]], inun_metrics_2100_dre_RCP4_elnino[[6]],
+                             inun_metrics_2100_dre_RCP8_normal[[6]], inun_metrics_2100_dre_RCP8_elnino[[6]]
+                             )
 
+names(perc_summ_inund_fut) <- c("perc_summ_inun_2050_ND_RCP4_normal", "perc_summ_inun_2050_ND_RCP4_elnino",
+                                "perc_summ_inun_2050_ND_RCP8_normal", "perc_summ_inun_2050_ND_RCP8_elnino",
+                                "perc_summ_inun_2050_dre_RCP4_normal", "perc_summ_inun_2050_dre_RCP4_elnino",
+                                "perc_summ_inun_2050_dre_RCP8_normal", "perc_summ_inun_2050_dre_RCP8_elnino",
+                                "perc_summ_inun_2100_ND_RCP4_normal", "perc_summ_inun_2100_ND_RCP4_elnino",
+                                "perc_summ_inun_2100_ND_RCP8_normal", "perc_summ_inun_2100_ND_RCP8_elnino",
+                                "perc_summ_inun_2100_dre_RCP4_normal", "perc_summ_inun_2100_dre_RCP4_elnino",
+                                "perc_summ_inun_2100_dre_RCP8_normal", "perc_summ_inun_2100_dre_RCP8_elnino")
+
+writeRaster(perc_summ_inund_fut, "C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd", format = "raster")
+perc_summ_inund_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd")
+
+
+
+
+#make stack of spartina height
 sp_max_stack_fut <- stack(sp_max_2100_dre_RCP8_elnino, sp_max_2100_dre_RCP8_normal, 
                           sp_max_2100_dre_RCP4_elnino, sp_max_2100_dre_RCP4_normal, 
                           sp_max_2100_ND_RCP8_elnino,sp_max_2100_ND_RCP8_normal,
@@ -1251,36 +1278,36 @@ UNB <- st_as_sf(UNB)
 #extract the approriate metrics (SPSP_MAX_grt60 + SPSP_MAX_95 + SPSP_MAX_grt90) and tidy up data
 
 #grt_90 (proportion of acre with spartina greater than 90cm)
-bird_dat_inundation_fut<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_90, layer = 1, nl = 8))
-names(bird_dat_inundation_fut)[2:9] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_90, layer = 1, nl = 16))
+names(bird_dat_inundation_fut)[2:17] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy <- bird_dat_inundation_fut %>% 
-  gather(sp_max_2100_dredge_1m_elnino:sp_max_2100_nodredge_0.5m_normal, key = "key", value = "SPSP_MAX_grt90", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "SLR", "climate"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino:sp_max_2050_ND_RCP4_normal, key = "key", value = "SPSP_MAX_grt90", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #MAX_95 (95% percentile value of the max spartina height)
-bird_dat_inundation_fut_2<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = nintyfifthpercentile, layer = 1, nl = 8))
-names(bird_dat_inundation_fut_2)[2:9] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut_2<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = nintyfifthpercentile, layer = 1, nl = 16))
+names(bird_dat_inundation_fut_2)[2:17] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy_2 <- bird_dat_inundation_fut_2 %>% 
-  gather(sp_max_2100_dredge_1m_elnino:sp_max_2100_nodredge_0.5m_normal, key = "key", value = "SPSP_MAX_95", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "SLR", "climate"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino:sp_max_2050_ND_RCP4_normal, key = "key", value = "SPSP_MAX_95", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #MAX_grt60 (proportion of acre with spartina greater than 60cm)
-bird_dat_inundation_fut_3<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_60, layer = 1, nl = 8))
-names(bird_dat_inundation_fut_3)[2:9] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut_3<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_60, layer = 1, nl = 16))
+names(bird_dat_inundation_fut_3)[2:17] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy_3 <- bird_dat_inundation_fut_3 %>% 
-  gather(sp_max_2100_dredge_1m_elnino:sp_max_2100_nodredge_0.5m_normal, key = "key", value = "SPSP_MAX_grt60", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "SLR", "climate"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino:sp_max_2050_ND_RCP4_normal, key = "key", value = "SPSP_MAX_grt60", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #join future sp metrics
 bird_dat_inundation_fut_4 <- left_join(data.frame(bird_dat_inundation_fut_tidy), 
                                        data.frame(bird_dat_inundation_fut_tidy_2),
-                                       by = c("UID", "year", "sediment", "SLR", "climate"))
+                                       by = c("UID", "year", "sediment", "RCP", "yrtype"))
 bird_dat_inundation_fut_4 <- left_join(bird_dat_inundation_fut_4, 
                                        data.frame(bird_dat_inundation_fut_tidy_3),
-                                       by = c("UID", "year", "sediment", "SLR", "climate"))
+                                       by = c("UID", "year", "sediment", "RCP", "yrtype"))
 bird_dat_inundation_fut_4 <- bird_dat_inundation_fut_4 %>% 
   select(-c("geometry.x", "geometry.y", "geometry"))
 
@@ -1288,51 +1315,115 @@ save(bird_dat_inundation_fut_4, file = "C:/Users/JennyT/Documents/LitReview/UCI/
 
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/future_spartina_UNB.RData")
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/mdl_pct_rail_pres.rda")
-#predict prob of bird occurrence using rows with the same attributes
+
+
+#predict prob of bird occurrence using rows with the same attributes 
+
+bird_dat_inundation_fut_4$predict <- predict(mdl_pct_rail_pres, newdata = bird_dat_inundation_fut_4, type= "response")
+railpred <- left_join(UNB, bird_dat_inundation_fut_4, by = "UID")
+save(railpred, file = "C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
+
+
+#2100
+
+
+
 fut_dreg_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dredge", SLR == "1m", climate == "normal")
+  filter(sediment == "dre", RCP == "RCP8", yrtype == "normal", year == "2100")
 fut_dreg_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_norm, type= "response")
 fut_dreg_onem_norm <- left_join(UNB, fut_dreg_onem_norm, by = "UID")
-plot(fut_dreg_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "Dredge, 1m")
+plot(fut_dreg_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 Dredge RCP8")
 
 fut_dreg_onem_elni<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dredge", SLR == "1m", climate == "elnino")
+  filter(sediment == "dre", RCP == "RCP8", yrtype == "elnino", year == "2100")
 fut_dreg_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_elni, type= "response")
 fut_dreg_onem_elni <- left_join(UNB, fut_dreg_onem_elni, by = "UID")
 plot(fut_dreg_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
 
 fut_dreg_hafm_norm<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dredge", SLR == "0.5m", climate == "normal")
+  filter(sediment == "dre", RCP == "RCP4", yrtype == "normal", year == "2100")
 fut_dreg_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_norm, type= "response")
 fut_dreg_hafm_norm <- left_join(UNB, fut_dreg_hafm_norm, by = "UID")
-plot(fut_dreg_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "Dredge, 0.5m")
+plot(fut_dreg_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 Dredge, RCP4")
 
 fut_dreg_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dredge", SLR == "0.5m", climate == "elnino")
+  filter(sediment == "dre", RCP == "RCP4", yrtype == "elnino", year == "2100")
 fut_dreg_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_elni, type= "response")
 fut_dreg_hafm_elni <- left_join(UNB, fut_dreg_hafm_elni, by = "UID")
 plot(fut_dreg_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
 
 fut_nodr_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "nodredge", SLR == "1m", climate == "normal")
+  filter(sediment == "ND", RCP == "RCP8", yrtype == "normal", year == "2100")
 fut_nodr_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_norm, type= "response")
 fut_nodr_onem_norm <- left_join(UNB, fut_nodr_onem_norm, by = "UID")
-plot(fut_nodr_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "No Dredge, 1m")
+plot(fut_nodr_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 No Dredge, RCP8")
 
 fut_nodr_onem_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "nodredge", SLR == "1m", climate == "elnino")
+  filter(sediment == "ND", RCP == "RCP8", yrtype == "elnino", year == "2100")
 fut_nodr_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_elni, type= "response")
 fut_nodr_onem_elni <- left_join(UNB, fut_nodr_onem_elni, by = "UID")
 plot(fut_nodr_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
 
 fut_nodr_hafm_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "nodredge", SLR == "0.5m", climate == "normal")
+  filter(sediment == "ND", RCP == "RCP4", yrtype == "normal", year == "2100")
 fut_nodr_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_norm, type= "response")
 fut_nodr_hafm_norm <- left_join(UNB, fut_nodr_hafm_norm, by = "UID")
-plot(fut_nodr_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "No Dredge, 0.5m")
+plot(fut_nodr_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 No Dredge, RCP4")
 
 fut_nodr_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "nodredge", SLR == "0.5m", climate == "elnino")
+  filter(sediment == "ND", RCP == "RCP4", yrtype == "elnino", year == "2100")
+fut_nodr_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_elni, type= "response")
+fut_nodr_hafm_elni <- left_join(UNB, fut_nodr_hafm_elni, by = "UID")
+plot(fut_nodr_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
+
+
+
+#2050
+
+fut_dreg_onem_norm <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "dre", RCP == "RCP8", yrtype == "normal", year == "2050")
+fut_dreg_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_norm, type= "response")
+fut_dreg_onem_norm <- left_join(UNB, fut_dreg_onem_norm, by = "UID")
+plot(fut_dreg_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 Dredge, RCP8")
+
+fut_dreg_onem_elni<- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "dre", RCP == "RCP8", yrtype == "elnino", year == "2050")
+fut_dreg_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_elni, type= "response")
+fut_dreg_onem_elni <- left_join(UNB, fut_dreg_onem_elni, by = "UID")
+plot(fut_dreg_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
+
+fut_dreg_hafm_norm<- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "dre", RCP == "RCP4", yrtype == "normal", year == "2050")
+fut_dreg_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_norm, type= "response")
+fut_dreg_hafm_norm <- left_join(UNB, fut_dreg_hafm_norm, by = "UID")
+plot(fut_dreg_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 Dredge, RCP4")
+
+fut_dreg_hafm_elni <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "dre", RCP == "RCP4", yrtype == "elnino", year == "2050")
+fut_dreg_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_elni, type= "response")
+fut_dreg_hafm_elni <- left_join(UNB, fut_dreg_hafm_elni, by = "UID")
+plot(fut_dreg_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
+
+fut_nodr_onem_norm <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "ND", RCP == "RCP8", yrtype == "normal", year == "2050")
+fut_nodr_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_norm, type= "response")
+fut_nodr_onem_norm <- left_join(UNB, fut_nodr_onem_norm, by = "UID")
+plot(fut_nodr_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 No Dredge, RCP8")
+
+fut_nodr_onem_elni <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "ND", RCP == "RCP8", yrtype == "elnino", year == "2050")
+fut_nodr_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_elni, type= "response")
+fut_nodr_onem_elni <- left_join(UNB, fut_nodr_onem_elni, by = "UID")
+plot(fut_nodr_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
+
+fut_nodr_hafm_norm <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "ND", RCP == "RCP4", yrtype == "normal", year == "2050")
+fut_nodr_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_norm, type= "response")
+fut_nodr_hafm_norm <- left_join(UNB, fut_nodr_hafm_norm, by = "UID")
+plot(fut_nodr_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 No Dredge, RCP4")
+
+fut_nodr_hafm_elni <- bird_dat_inundation_fut_4 %>% 
+  filter(sediment == "ND", RCP == "RCP4", yrtype == "elnino", year == "2050")
 fut_nodr_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_elni, type= "response")
 fut_nodr_hafm_elni <- left_join(UNB, fut_nodr_hafm_elni, by = "UID")
 plot(fut_nodr_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
