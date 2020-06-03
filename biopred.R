@@ -354,7 +354,7 @@ lev_2050_normal_RCP4 <- lev_2011_MSL %>%
   dplyr::select(1,4,3)
 
 #RCP 8.5 , 2050, el nino year, MSL
-lev_2050_elnino__RCP8 <- lev_2015_MSL %>% 
+lev_2050_elnino_RCP8 <- lev_2015_MSL %>% 
   mutate(lev_m_2100 = lev_m+0.2911) %>% 
   dplyr::select(1,4,3)
 
@@ -706,93 +706,93 @@ inun_metrics_2100_nodredge_RCP4_normal <- writeRaster(inun_metrics_2100_nodredge
 
 
 #Dredge, RCP8.5, 2050, El Nino , MSL
-summ_2050_dredge_RCP8_elnino <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="S",])
+summ_2050_dredge_RCP8_elnino <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2050_elnino_RCP8[lev_2050_elnino_RCP8$season=="S",])
 names(summ_2050_dredge_RCP8_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                        "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_dredge_RCP8_elnino <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="W",])
+wint_2050_dredge_RCP8_elnino <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2050_elnino_RCP8[lev_2050_elnino_RCP8$season=="W",])
 names(wint_2050_dredge_RCP8_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                        "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_dredge_RCP8_elnino <- stack(summ_2050_dredge_RCP8_elnino, wint_2050_dredge_RCP8_elnino, elv_m_2050_dre_RCP8)
 names(inun_metrics_2050_dredge_RCP8_elnino[[15]]) <- "elv_m"
-inun_metrics_2050_dredge_RCP8_elnino <- writeRaster(inun_metrics_2050_dredge_RCP8_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2050_dredge_RCP8_elnino <- writeRaster(inun_metrics_2050_dredge_RCP8_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_elnino_inun_metrics_.grd", overwrite=TRUE)
 
 #Dredge, RCP8.5, 2050, Normal, MSL
-summ_2050_dredge_RCP8_normal <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="S",])
+summ_2050_dredge_RCP8_normal <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2050_normal_RCP8[lev_2050_normal_RCP8$season=="S",])
 names(summ_2050_dredge_RCP8_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                        "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_dredge_RCP8_normal <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="W",])
+wint_2050_dredge_RCP8_normal <- inundation(elv = elv_m_2050_dre_RCP8, lev = lev_2050_normal_RCP8[lev_2050_normal_RCP8$season=="W",])
 names(wint_2050_dredge_RCP8_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                        "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_dredge_RCP8_normal <- stack(summ_2050_dredge_RCP8_normal, wint_2050_dredge_RCP8_normal, elv_m_2050_dre_RCP8)
 names(inun_metrics_2050_dredge_RCP8_normal[[15]]) <- "elv_m"
-inun_metrics_2050_dredge_RCP8_normal <- writeRaster(inun_metrics_2050_dredge_RCP8_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2050_dredge_RCP8_normal <- writeRaster(inun_metrics_2050_dredge_RCP8_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP8_normal_inun_metrics_.grd", overwrite=TRUE)
 
 
 #Dredge, RCP4.5, 2050, El Nino , MSL
-summ_2050_dredge_RCP4_elnino <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="S",])
+summ_2050_dredge_RCP4_elnino <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2050_elnino_RCP4[lev_2050_elnino_RCP4$season=="S",])
 names(summ_2050_dredge_RCP4_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                          "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_dredge_RCP4_elnino <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="W",])
+wint_2050_dredge_RCP4_elnino <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2050_elnino_RCP4[lev_2050_elnino_RCP4$season=="W",])
 names(wint_2050_dredge_RCP4_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                          "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_dredge_RCP4_elnino <- stack(summ_2050_dredge_RCP4_elnino, wint_2050_dredge_RCP4_elnino, elv_m_2050_dre_RCP4 )
 names(inun_metrics_2050_dredge_RCP4_elnino[[15]]) <- "elv_m"
-inun_metrics_2050_dredge_RCP4_elnino <- writeRaster(inun_metrics_2050_dredge_RCP4_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2050_dredge_RCP4_elnino <- writeRaster(inun_metrics_2050_dredge_RCP4_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP4_elnino_inun_metrics_.grd", overwrite=TRUE)
 
 #Dredge, RCP4.5, 2050, Normal , MSL
-summ_2050_dredge_RCP4_normal <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="S",])
+summ_2050_dredge_RCP4_normal <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2050_normal_RCP4[lev_2050_normal_RCP4$season=="S",])
 names(summ_2050_dredge_RCP4_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                          "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_dredge_RCP4_normal <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="W",])
+wint_2050_dredge_RCP4_normal <- inundation(elv = elv_m_2050_dre_RCP4 , lev = lev_2050_normal_RCP4[lev_2050_normal_RCP4$season=="W",])
 names(wint_2050_dredge_RCP4_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                          "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_dredge_RCP4_normal <- stack(summ_2050_dredge_RCP4_normal, wint_2050_dredge_RCP4_normal, elv_m_2050_dre_RCP4 )
 names(inun_metrics_2050_dredge_RCP4_normal[[15]]) <- "elv_m"
-inun_metrics_2050_dredge_RCP4_normal <- writeRaster(inun_metrics_2050_dredge_RCP4_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2050_dredge_RCP4_normal <- writeRaster(inun_metrics_2050_dredge_RCP4_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_dredge_RCP4_normal_inun_metrics_.grd", overwrite=TRUE)
 
 #NoDredge, RCP8.5, 2050, El Nino , MSL
-summ_2050_nodredge_RCP8_elnino <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="S",])
+summ_2050_nodredge_RCP8_elnino <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2050_elnino_RCP8[lev_2050_elnino_RCP8$season=="S",])
 names(summ_2050_nodredge_RCP8_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_nodredge_RCP8_elnino <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="W",])
+wint_2050_nodredge_RCP8_elnino <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2050_elnino_RCP8[lev_2050_elnino_RCP8$season=="W",])
 names(wint_2050_nodredge_RCP8_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_nodredge_RCP8_elnino <- stack(summ_2050_nodredge_RCP8_elnino, wint_2050_nodredge_RCP8_elnino, elv_m_2050_ND_RCP8)
 names(inun_metrics_2050_nodredge_RCP8_elnino[[15]]) <- "elv_m"
-inun_metrics_2050_nodredge_RCP8_elnino <- writeRaster(inun_metrics_2050_nodredge_RCP8_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_elnino_inun_metrics_.grd")
+inun_metrics_2050_nodredge_RCP8_elnino <- writeRaster(inun_metrics_2050_nodredge_RCP8_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_elnino_inun_metrics_.grd", overwrite=TRUE)
 
 #NoDredge, RCP8.5, 2050, Normal , MSL
-summ_2050_nodredge_RCP8_normal <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="S",])
+summ_2050_nodredge_RCP8_normal <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2050_normal_RCP8[lev_2050_normal_RCP8$season=="S",])
 names(summ_2050_nodredge_RCP8_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_nodredge_RCP8_normal <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="W",])
+wint_2050_nodredge_RCP8_normal <- inundation(elv = elv_m_2050_ND_RCP8, lev = lev_2050_normal_RCP8[lev_2050_normal_RCP8$season=="W",])
 names(wint_2050_nodredge_RCP8_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_nodredge_RCP8_normal <- stack(summ_2050_nodredge_RCP8_normal, wint_2050_nodredge_RCP8_normal, elv_m_2050_ND_RCP8)
 names(inun_metrics_2050_nodredge_RCP8_normal[[15]]) <- "elv_m"
-inun_metrics_2050_nodredge_RCP8_normal <- writeRaster(inun_metrics_2050_nodredge_RCP8_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_normal_inun_metrics_.grd")
+inun_metrics_2050_nodredge_RCP8_normal <- writeRaster(inun_metrics_2050_nodredge_RCP8_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP8_normal_inun_metrics_.grd", overwrite=TRUE)
 
 #NoDredge, RCP4.5, 2050, El Nino , MSL
-summ_2050_nodredge_RCP4_elnino <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="S",])
+summ_2050_nodredge_RCP4_elnino <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2050_elnino_RCP4[lev_2050_elnino_RCP4$season=="S",])
 names(summ_2050_nodredge_RCP4_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_nodredge_RCP4_elnino <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="W",])
+wint_2050_nodredge_RCP4_elnino <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2050_elnino_RCP4[lev_2050_elnino_RCP4$season=="W",])
 names(wint_2050_nodredge_RCP4_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_nodredge_RCP4_elnino <- stack(summ_2050_nodredge_RCP4_elnino, wint_2050_nodredge_RCP4_elnino, elv_m_2050_ND_RCP4)
 names(inun_metrics_2050_nodredge_RCP4_elnino[[15]]) <- "elv_m"
-inun_metrics_2050_nodredge_RCP4_elnino <- writeRaster(inun_metrics_2050_nodredge_RCP4_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_elnino_inun_metrics_.grd")
+inun_metrics_2050_nodredge_RCP4_elnino <- writeRaster(inun_metrics_2050_nodredge_RCP4_elnino, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_elnino_inun_metrics_.grd", overwrite=TRUE)
 
 #NoDredge, RCP4.5, 2050, Normal  , MSL
-summ_2050_nodredge_RCP4_normal <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="S",])
+summ_2050_nodredge_RCP4_normal <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2050_normal_RCP4[lev_2050_normal_RCP4$season=="S",])
 names(summ_2050_nodredge_RCP4_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
-wint_2050_nodredge_RCP4_normal <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="W",])
+wint_2050_nodredge_RCP4_normal <- inundation(elv = elv_m_2050_ND_RCP4, lev = lev_2050_normal_RCP4[lev_2050_normal_RCP4$season=="W",])
 names(wint_2050_nodredge_RCP4_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
 inun_metrics_2050_nodredge_RCP4_normal <- stack(summ_2050_nodredge_RCP4_normal, wint_2050_nodredge_RCP4_normal, elv_m_2050_ND_RCP4)
 names(inun_metrics_2050_nodredge_RCP4_normal[[15]]) <- "elv_m"
-inun_metrics_2050_nodredge_RCP4_normal <- writeRaster(inun_metrics_2050_nodredge_RCP4_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_normal_inun_metrics_.grd")
+inun_metrics_2050_nodredge_RCP4_normal <- writeRaster(inun_metrics_2050_nodredge_RCP4_normal, "C:/Users/JennyT/Documents/LitReview/UCI/working data/_2050_ND_RCP4_normal_inun_metrics_.grd", overwrite=TRUE)
 
 
 
@@ -940,7 +940,7 @@ names(perc_summ_inund_fut) <- c("perc_summ_inun_2050_ND_RCP4_normal", "perc_summ
                                 "perc_summ_inun_2100_dre_RCP4_normal", "perc_summ_inun_2100_dre_RCP4_elnino",
                                 "perc_summ_inun_2100_dre_RCP8_normal", "perc_summ_inun_2100_dre_RCP8_elnino")
 
-writeRaster(perc_summ_inund_fut, "C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd", format = "raster")
+writeRaster(perc_summ_inund_fut, "C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd", format = "raster", overwrite = TRUE)
 perc_summ_inund_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd")
 
 
@@ -1317,116 +1317,19 @@ load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/future_spar
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/mdl_pct_rail_pres.rda")
 
 
-#predict prob of bird occurrence using rows with the same attributes 
+
+
+#predict prob of bird occurrence 
+
+
 
 bird_dat_inundation_fut_4$predict <- predict(mdl_pct_rail_pres, newdata = bird_dat_inundation_fut_4, type= "response")
 railpred <- left_join(UNB, bird_dat_inundation_fut_4, by = "UID")
+railpred <- railpred %>% 
+  filter(!is.na(year))
 save(railpred, file = "C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
 
 
-#2100
-
-
-
-fut_dreg_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP8", yrtype == "normal", year == "2100")
-fut_dreg_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_norm, type= "response")
-fut_dreg_onem_norm <- left_join(UNB, fut_dreg_onem_norm, by = "UID")
-plot(fut_dreg_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 Dredge RCP8")
-
-fut_dreg_onem_elni<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP8", yrtype == "elnino", year == "2100")
-fut_dreg_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_elni, type= "response")
-fut_dreg_onem_elni <- left_join(UNB, fut_dreg_onem_elni, by = "UID")
-plot(fut_dreg_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_dreg_hafm_norm<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP4", yrtype == "normal", year == "2100")
-fut_dreg_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_norm, type= "response")
-fut_dreg_hafm_norm <- left_join(UNB, fut_dreg_hafm_norm, by = "UID")
-plot(fut_dreg_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 Dredge, RCP4")
-
-fut_dreg_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP4", yrtype == "elnino", year == "2100")
-fut_dreg_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_elni, type= "response")
-fut_dreg_hafm_elni <- left_join(UNB, fut_dreg_hafm_elni, by = "UID")
-plot(fut_dreg_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_nodr_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP8", yrtype == "normal", year == "2100")
-fut_nodr_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_norm, type= "response")
-fut_nodr_onem_norm <- left_join(UNB, fut_nodr_onem_norm, by = "UID")
-plot(fut_nodr_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 No Dredge, RCP8")
-
-fut_nodr_onem_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP8", yrtype == "elnino", year == "2100")
-fut_nodr_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_elni, type= "response")
-fut_nodr_onem_elni <- left_join(UNB, fut_nodr_onem_elni, by = "UID")
-plot(fut_nodr_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_nodr_hafm_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP4", yrtype == "normal", year == "2100")
-fut_nodr_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_norm, type= "response")
-fut_nodr_hafm_norm <- left_join(UNB, fut_nodr_hafm_norm, by = "UID")
-plot(fut_nodr_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2100 No Dredge, RCP4")
-
-fut_nodr_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP4", yrtype == "elnino", year == "2100")
-fut_nodr_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_elni, type= "response")
-fut_nodr_hafm_elni <- left_join(UNB, fut_nodr_hafm_elni, by = "UID")
-plot(fut_nodr_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-
-
-#2050
-
-fut_dreg_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP8", yrtype == "normal", year == "2050")
-fut_dreg_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_norm, type= "response")
-fut_dreg_onem_norm <- left_join(UNB, fut_dreg_onem_norm, by = "UID")
-plot(fut_dreg_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 Dredge, RCP8")
-
-fut_dreg_onem_elni<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP8", yrtype == "elnino", year == "2050")
-fut_dreg_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_onem_elni, type= "response")
-fut_dreg_onem_elni <- left_join(UNB, fut_dreg_onem_elni, by = "UID")
-plot(fut_dreg_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_dreg_hafm_norm<- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP4", yrtype == "normal", year == "2050")
-fut_dreg_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_norm, type= "response")
-fut_dreg_hafm_norm <- left_join(UNB, fut_dreg_hafm_norm, by = "UID")
-plot(fut_dreg_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 Dredge, RCP4")
-
-fut_dreg_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "dre", RCP == "RCP4", yrtype == "elnino", year == "2050")
-fut_dreg_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_dreg_hafm_elni, type= "response")
-fut_dreg_hafm_elni <- left_join(UNB, fut_dreg_hafm_elni, by = "UID")
-plot(fut_dreg_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_nodr_onem_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP8", yrtype == "normal", year == "2050")
-fut_nodr_onem_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_norm, type= "response")
-fut_nodr_onem_norm <- left_join(UNB, fut_nodr_onem_norm, by = "UID")
-plot(fut_nodr_onem_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 No Dredge, RCP8")
-
-fut_nodr_onem_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP8", yrtype == "elnino", year == "2050")
-fut_nodr_onem_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_onem_elni, type= "response")
-fut_nodr_onem_elni <- left_join(UNB, fut_nodr_onem_elni, by = "UID")
-plot(fut_nodr_onem_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
-
-fut_nodr_hafm_norm <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP4", yrtype == "normal", year == "2050")
-fut_nodr_hafm_norm$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_norm, type= "response")
-fut_nodr_hafm_norm <- left_join(UNB, fut_nodr_hafm_norm, by = "UID")
-plot(fut_nodr_hafm_norm["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5, main = "2050 No Dredge, RCP4")
-
-fut_nodr_hafm_elni <- bird_dat_inundation_fut_4 %>% 
-  filter(sediment == "ND", RCP == "RCP4", yrtype == "elnino", year == "2050")
-fut_nodr_hafm_elni$predict <- predict(mdl_pct_rail_pres, newdata = fut_nodr_hafm_elni, type= "response")
-fut_nodr_hafm_elni <- left_join(UNB, fut_nodr_hafm_elni, by = "UID")
-plot(fut_nodr_hafm_elni["predict"], key.pos = 1,  key.width = lcm(1.3), key.length = 0.5)
 
 
 ###################################################################################################

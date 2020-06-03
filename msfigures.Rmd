@@ -20,6 +20,26 @@ Here we read in the future percent summer inundation values
 ```{r}
 
 perc_summ_inund_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd")
+plot(perc_summ_inund_fut)
+data.frame(cellStats(perc_summ_inund_fut, quantile))
+
+
+library(rasterVis)
+cols <- colorRampPalette(brewer.pal(9,"YlGn"))
+png("summ_inund_fut.png", res = 300)
+#plot all 8 combinations
+print(rasterVis::levelplot(perc_summ_inund_fut, names.attr = c("2100_dre_RCP8_elnino", "2100_dre_RCP8_normal", 
+                                                            "2100_dre_RCP4_elnino", "2100_dre_RCP4_normal", 
+                                                            "2100_ND_RCP8_elnino", "2100_ND_RCP8_normal",
+                                                            "2100_ND_RCP4_elnino", "2100_ND_RCP4_normal",
+                                                            "2050_dre_RCP8_elnino", "2050_dre_RCP8_normal", 
+                                                            "2050_dre_RCP4_elnino", "2050_dre_RCP4_normal", 
+                                                            "2050_ND_RCP8_elnino", "2050_ND_RCP8_normal",
+                                                            "2050_ND_RCP4_elnino", "2050_ND_RCP4_normal"),
+                           col.regions=cols,
+                           scales=list(draw=FALSE),
+                           layout=c(4, 4)))#remove axis ticks
+dev.off()
 
 
 ```
@@ -31,9 +51,35 @@ sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/worki
 
 ```
 
-here we read in the future rail predictions
+here we read in the future rail predictions. There are 16 scenarios total. First we determine if el nino or normal makes a difference, and if not we average predictions from the two and reduce it to 8 predictions.  
 ```{r}
 
-railpred <- load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
+load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
+
+#does the year type (el nino vs normal) make a difference
+t.test(railpred$predict[railpred$yrtype=="elnino"], railpred$predict[railpred$yrtype =="normal"])
+#p-value = 0.3326, ie there is no evidence that the means between the two groups differ
+
+#average the two year types together to reduce the number of scenarios
+railpred <- railpred %>% 
+  data.frame() %>% 
+  dplyr::select(-SPSP_MAX_grt90, -SPSP_MAX_95, -SPSP_MAX_grt60, -geometry) %>% 
+  pivot_wider(names_from = yrtype, values_from = predict) %>% 
+  mutate(railprob = (normal+elnino)/2) %>% 
+  select(-elnino, -normal)
+railpred <- left_join(UNB, railpred, by = "UID") %>% 
+  filter(!is.na(year))
+  
+#plot the probability of rail occurrence
+ggplot(data = railpred, aes(fill = railprob))+
+  geom_sf(color = NA)+
+  labs(title = "Rail Probablity")+
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())+
+  facet_wrap(vars(year, sediment, RCP), nrow = 2)
+
+
+
 
 ```
