@@ -6,13 +6,25 @@ output: html_document
 ---
 
 manuscript figures
-spatial maps of
-%inundation in the summer
-Spartina height
-probability of RR occurrence
+1. spatial maps future 2050 and 2100 RCP 8.5 and RCp 4.5 'normal' conditions and 2015
+  - %inundation in the summer
+  - Spartina height
+  - probability of RR occurrence
+  
+2. Density plots
+  - how drege and no dredge impact the results for  RCP8.5 2100
+  - how el nino would impact the results for RCP8.5 2100
 
 Tables:
-summary stats for %inundation in summer, spartina height, probability of RR occurrence for each scenario
+1. summary stats for %inundation in summer, spartina height, probability of RR occurrence for baseline year 2015, and each scenario
+
+Model results and validation:
+1. zero inflated model results for spartina height using the training data in 2012
+2. logistic regression results for Probability of LFRR occurrence using the 2011-2018 spartina height and % of 8 years that there was nesting within the extent that Karne did her survey
+3. validation of probability of LRFF occurrence as predicted based on the delft3d 2015 spartina height and the 2015 rail survey
+   -  make a prediction of >.5 an occurrence and see how many plots agreed with the 2015 georeferenced rail survey
+   - R2 between the prob of occurrence and the percent of years occupied
+
 
 
 Here we read in the future percent summer inundation values
@@ -41,6 +53,8 @@ print(rasterVis::levelplot(perc_summ_inund_fut, names.attr = c("2100_dre_RCP8_el
                            layout=c(4, 4)))#remove axis ticks
 dev.off()
 
+densityplot(perc_summ_inund_fut)
+bwplot(perc_summ_inund_fut)
 
 ```
 
@@ -51,9 +65,12 @@ sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/worki
 
 ```
 
-here we read in the future rail predictions. There are 16 scenarios total. First we determine if el nino or normal makes a difference, and if not we average predictions from the two and reduce it to 8 predictions.  
+here we read in the future rail predictions and the 2015 rail predictions for validations. There are 16 scenarios total. First we determine if el nino or normal makes a difference, and if not we average predictions from the two and reduce it to 8 predictions.  
 ```{r}
+#2015
+load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/bird_dat_inundation_2015_Delft3D_4.RData")
 
+#future
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
 
 #does the year type (el nino vs normal) make a difference
@@ -71,7 +88,7 @@ railpred <- left_join(UNB, railpred, by = "UID") %>%
   filter(!is.na(year))
   
 #plot the probability of rail occurrence
-ggplot(data = railpred, aes(fill = railprob))+
+d <- ggplot(data = railpred, aes(fill = railprob))+
   geom_sf(color = NA)+
   labs(title = "Rail Probablity")+
   theme(axis.text.x = element_blank(),
@@ -80,6 +97,6 @@ ggplot(data = railpred, aes(fill = railprob))+
   facet_wrap(vars(year, sediment, RCP), nrow = 2)
 
 
-
+ggsave(d, filename = "railProbFut.TIFF", dpi = 300, width = 25, height = 15, units = "cm", compression = "lzw")
 
 ```

@@ -844,7 +844,7 @@ sp_max_2017 <- spsp_predict(rasterstack = inun_metrics_17)
 inun_metrics_18 <- stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/_2018_inun_metrics_.grd")
 sp_max_2018 <- spsp_predict(rasterstack = inun_metrics_18)
 
-#stack rasters so there is a stack of the max height of Spartina each year - this will be used in model two
+#stack rasters so there is a stack of the max height of Spartina each year - this will be used in the model to predict the probability of LFRR occurrence
 sp_max_stack <- stack(sp_max_2011, sp_max_2012, sp_max_2013, sp_max_2014, sp_max_2015,sp_max_2016, sp_max_2017, sp_max_2018)
 
 names(sp_max_stack) <- c("sp_max_2011", "sp_max_2012", "sp_max_2013", "sp_max_2014", "sp_max_2015", "sp_max_2016", "sp_max_2017", "sp_max_2018") 
@@ -971,34 +971,8 @@ sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/worki
 t <- data.frame(cellStats(sp_max_stack_fut, quantile))
 
 
-library(rasterVis)
-cols <- colorRampPalette(brewer.pal(9,"YlGn"))
-png("sp_max_stack_fut.png", res = 300)
-#plot all 8 combinations
-print(rasterVis::levelplot(sp_max_stack_fut, names.attr = c("2100_dre_RCP8_elnino", "2100_dre_RCP8_normal", 
-                                                            "2100_dre_RCP4_elnino", "2100_dre_RCP4_normal", 
-                                                            "2100_ND_RCP8_elnino", "2100_ND_RCP8_normal",
-                                                            "2100_ND_RCP4_elnino", "2100_ND_RCP4_normal",
-                                                            "2050_dre_RCP8_elnino", "2050_dre_RCP8_normal", 
-                                                            "2050_dre_RCP4_elnino", "2050_dre_RCP4_normal", 
-                                                            "2050_ND_RCP8_elnino", "2050_ND_RCP8_normal",
-                                                            "2050_ND_RCP4_elnino", "2050_ND_RCP4_normal"),
-                           col.regions=cols,
-                           scales=list(draw=FALSE),
-                           layout=c(4, 4)))#remove axis ticks
-dev.off()
 
-#plot just 4 combinations 
-justfour <- sp_max_stack_fut[[c(2,4,6,8)]]
-png("sp_max_stack_fut_normal_yr.png", width = 4.5, height = 4.5, units = 'in', res = 300)
-print(rasterVis::levelplot(justfour, names.attr = c("Dredge 1m", "Dredge 0.5m", "No Dredge 1m", "No Dredge 0.5m"),
-                           col.regions=cols,
-                           scales=list(draw=FALSE),
-                           layout=c(2, 2)))#remove axis ticks
-dev.off()
 
-densityplot(sp_max_stack_fut)
-bwplot(sp_max_stack_fut)
 
 ###################################################################################################
 ###################################################################################################
@@ -1007,6 +981,10 @@ bwplot(sp_max_stack_fut)
 
 ###################################################################################################
 ###################################################################################################
+
+
+
+
 
 #Predict the percentage of years a LFRR will occupy an acre using the SPSP max metrics calculated per acre plot
 
@@ -1245,21 +1223,21 @@ bird_dat_inundation_2015_Delft3D_4 <- left_join(bird_dat_inundation_2015_Delft3D
   dplyr::select( - c("geometry.x", "geometry.y", "geometry"))
 
 
-save(bird_dat_inundation_2015_Delft3D_4, file = "C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/bird_dat_inundation_2015_Delft3D_4.RData")
-
-load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/bird_dat_inundation_2015_Delft3D_4.RData")
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/mdl_pct_rail_pres.rda")
 UNB <- st_read("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/UNB_Grid.shp") %>% st_zm()
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/rail_beld_elv_veg.RData")
 dat <- dat %>% 
   dplyr::select(UID, pct_rail_pres)
+
 #predict prob of bird occurrence using rows with the same attributes
 validation_2015_Delft3D <- bird_dat_inundation_2015_Delft3D_4
 bird_dat_inundation_2015_Delft3D_4$predict <- predict(mdl_pct_rail_pres, newdata = bird_dat_inundation_2015_Delft3D_4, type= "response")
 bird_dat_inundation_2015_Delft3D_4 <- left_join(UNB, bird_dat_inundation_2015_Delft3D_4, by = "UID")
-bird_dat_inundation_2015_Delft3D_4 <- left_join(dat, bird_dat_inundation_2015_Delft3D_4, by = "UID")
+bird_dat_inundation_2015_Delft3D_4 <- left_join(bird_dat_inundation_2015_Delft3D_4, dat, by = "UID")
 plot(bird_dat_inundation_2015_Delft3D_4["predict"])
 cor(bird_dat_inundation_2015_Delft3D_4$pct_rail_pres, bird_dat_inundation_2015_Delft3D_4$predict, use = "complete.obs") #0.6584
+
+save(bird_dat_inundation_2015_Delft3D_4, file = "C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/bird_dat_inundation_2015_Delft3D_4.RData")
 
 
 
