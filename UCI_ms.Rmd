@@ -4,8 +4,8 @@ title: Modeling the potential for sediment management to ameliorate the impacts 
 author: "Jenny Rogers and Matt Brand"
 date: "March 29, 2020"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 bibliography: refs.bib
 ---
 
@@ -33,18 +33,19 @@ This work was funded by the National Oceanic and Atmospheric Association (NOAA) 
 Introduction
 ===============================================================
 
-Urban estuaries are embayments open to the coastal ocean that receive freshwater runoff, are characterized by urban development around the embayment and/or in the watershed [@Pritchard1967], and are under significant pressure related to land reclamation, waste discharges, and climate change [@lotze2006]. Urban estuaries represent critical coastal habitats that support ecosystems including birds, fish and invertebrates [@mclusky2004]. Additionally, urban estuaries provide benefits to society (or ecosystem services) including recreational opportunities for coastal communities, pollutant and nutrient processing, support for the shipping, defense and fishing industries, and urban amenities such as access to wildlife, seafood, and open spaces [@barbier2011]. These many benefits are often in competition and need to be balanced, thus posing challenges for management [@elliott2011].  
+Urban estuaries are embayments open to the coastal ocean that receive freshwater runoff, are characterized by urban development around the embayment and/or in the watershed [@Pritchard1967], and are under significant pressure related to land reclamation, waste discharges, and climate change [@lotze2006]. Urban estuaries represent critical coastal habitats that support ecosystems including birds, fish and invertebrates [@mclusky2004]. Additionally, urban estuaries provide benefits to society (or ecosystem services) including recreational opportunities for coastal communities, pollutant and nutrient processing, support for the shipping, defense and fishing industries, and urban amenities such as access to wildlife, seafood, and open spaces [@barbier2011]. These many benefits are often in competition and need to be balanced, thus posing challenges for management [@elliott2011].
+
+
 
 <!--- Jenny, maybe you could add in a section on more specifics for the biological benefits urban estuaries provide, then we can go into how modelling leads to better conservation planning, importance of modelling, and ideas for research gaps we are filling  --->
 
-<!---  some ideas for 'gaps' we are filling:
-1. challenge of predicting marsh impacts of SLR due to all the natural and anthropogenic drivers in urban watersheds, 
-2. challenges of managing for endangered species with an uncertain future
-3. need to evaluate new methods of marsh management for SLR (like sediment mgmt) when options like habitat transgression are not possible
-4.  need to reevaluate management requirements (like sediment mgmt) under climate change--->
 
 
-High resolution dynamic coastal modeling leads to better conservation planning [@Runting2013]. 
+High resolution dynamic coastal modeling has been found to lead to better conservation planning [@Runting2013].  Salt marsh stability is driven by marine water levels and freshwater inputs that contribute inorganic sediment, and decaying organic matter on the marsh surface.  Dynamic feedback loops between primary productivity and higher relative water levels (to an optimum) maintain marsh surface elevations (Kirwan & Guntenspergen, 2012) with more sediment trapping and deposition on the marsh plain from the increased duration of settling time and the increased density of stems which trap the sediment (Kirwan & Murray, 2007).  
+
+Some reserach has determined that coastal salt marshes at at risk of transitioning to mudflat and subtidal due to increased sea level rise [@Thorne2018] while other studies has suggested that perhaps salt marshes are more capable of suriving SLR (Kirwan paper). Efforts to project the impact climate change on Rallus spp. often focus on sea level rise as the driving force behind habitat loss (Veloz et al., 2013; Zhang & Gorelick, 2014; Hunter et al., 2017; Rosencranz et al., 2018).  <!--- note what the outcomes of these studies were---> However, this prior reserach has failed to consider the massive impacts that sediment management practicies have in the salt marsh.  In urban estuaries there are often a lot of sediment managemnt practices either in the marsh or in the watershed that impact marsh accretion.  These practices could be manipulated and used to alieviate the pressures of sea level rise. Models investing marsh vulnerability to sea level rise have not considered the influence of dredging practices on salt marsh persistence.
+
+We investigate the importance of salt marsh dredging The goals of this reserach were to determine if sediment management practices can be used in conservation planning for salt marsh habitats.  We use a combination of marsh surface modeling and biological suitability to evaluate the salt marsh condition in a series of future scenarios that consider global climate change and local weather pattersn (el nino dynamics). We incorportate marsh basin dredging into each scenario to determine how it changes the salt marsh surface elevation and habitat. 
 
 
 

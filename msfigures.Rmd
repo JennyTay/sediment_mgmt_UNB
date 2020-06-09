@@ -5,6 +5,17 @@ date: "June 2, 2020"
 output: html_document
 ---
 
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(raster)
+library(rasterVis)
+library(sf)
+
+```
+
+
 manuscript figures
 1. spatial maps future 2050 and 2100 RCP 8.5 and RCp 4.5 'normal' conditions and 2015
   - %inundation in the summer
@@ -36,9 +47,8 @@ plot(perc_summ_inund_fut)
 data.frame(cellStats(perc_summ_inund_fut, quantile))
 
 
-library(rasterVis)
-cols <- colorRampPalette(brewer.pal(9,"YlGn"))
-png("summ_inund_fut.png", res = 300)
+
+png("summ_inund_fut.png", res = 300, width = 25, height = 15, units = "cm")
 #plot all 8 combinations
 print(rasterVis::levelplot(perc_summ_inund_fut, names.attr = c("2100_dre_RCP8_elnino", "2100_dre_RCP8_normal", 
                                                             "2100_dre_RCP4_elnino", "2100_dre_RCP4_normal", 
@@ -48,7 +58,6 @@ print(rasterVis::levelplot(perc_summ_inund_fut, names.attr = c("2100_dre_RCP8_el
                                                             "2050_dre_RCP4_elnino", "2050_dre_RCP4_normal", 
                                                             "2050_ND_RCP8_elnino", "2050_ND_RCP8_normal",
                                                             "2050_ND_RCP4_elnino", "2050_ND_RCP4_normal"),
-                           col.regions=cols,
                            scales=list(draw=FALSE),
                            layout=c(4, 4)))#remove axis ticks
 dev.off()
@@ -67,8 +76,18 @@ sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/worki
 
 here we read in the future rail predictions and the 2015 rail predictions for validations. There are 16 scenarios total. First we determine if el nino or normal makes a difference, and if not we average predictions from the two and reduce it to 8 predictions.  
 ```{r}
+#UNB shapefile
+UNB <- st_read("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/UNB_Grid.shp")
+
 #2015
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/bird_dat_inundation_2015_Delft3D_4.RData")
+names(bird_dat_inundation_2015_Delft3D_4)[5] <- "railprob2015"
+ggplot(data = bird_dat_inundation_2015_Delft3D_4, aes(fill = railprob2015))+
+  geom_sf(color = NA)+
+  labs(title = "Rail Probablity")+
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())
 
 #future
 load("C:/Users/JennyT/Documents/LitReview/UCI/working data/FinalData/railpred.RData")
@@ -83,7 +102,7 @@ railpred <- railpred %>%
   dplyr::select(-SPSP_MAX_grt90, -SPSP_MAX_95, -SPSP_MAX_grt60, -geometry) %>% 
   pivot_wider(names_from = yrtype, values_from = predict) %>% 
   mutate(railprob = (normal+elnino)/2) %>% 
-  select(-elnino, -normal)
+  dplyr::select(-elnino, -normal)
 railpred <- left_join(UNB, railpred, by = "UID") %>% 
   filter(!is.na(year))
   
@@ -94,9 +113,38 @@ d <- ggplot(data = railpred, aes(fill = railprob))+
   theme(axis.text.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks = element_blank())+
-  facet_wrap(vars(year, sediment, RCP), nrow = 2)
+  facet_grid(rows=vars(year), cols=vars(RCP, sediment))
 
 
 ggsave(d, filename = "railProbFut.TIFF", dpi = 300, width = 25, height = 15, units = "cm", compression = "lzw")
+
+```
+
+
+In this chunk of code, we determine the average change in probablilty from 2015 for each of the scenarios
+
+```{r}
+
+baseline <- bird_dat_inundation_2015_Delft3D_4 %>% 
+  data.frame() %>% 
+  dplyr::select(UID, railprob2015, pct_rail_pres)
+
+chng <- left_join(railpred, baseline, by = "UID") %>% 
+  mutate(change = railprob - railprob2015)
+
+ggplot(data = chng, aes(fill = change))+
+  geom_sf(color = NA)+
+  labs(title = "Rail Probablity")+
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())+
+  facet_grid(rows=vars(year), cols=vars(RCP, sediment))
+
+
+summary <- chng %>% 
+  group_by(year, RCP, sediment) %>% 
+  summarise(mean = mean(change, na.rm = TRUE),
+            firstquartile = quantile(change, probs = 0.25, na.rm = TRUE),
+            thirdQualtile = quantile(change, probs = 0.75, na.rm = TRUE))
 
 ```
