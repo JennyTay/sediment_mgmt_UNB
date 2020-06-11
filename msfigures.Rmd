@@ -72,6 +72,8 @@ Here we read in the future spartina heights
 ```{r}
 sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd")
 
+plot(sp_max_stack_fut)
+
 ```
 
 here we read in the future rail predictions and the 2015 rail predictions for validations. There are 16 scenarios total. First we determine if el nino or normal makes a difference, and if not we average predictions from the two and reduce it to 8 predictions.  
