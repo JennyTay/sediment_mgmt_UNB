@@ -12,6 +12,8 @@ library(lubridate)
 library(raster)
 library(rasterVis)
 library(sf)
+library(gridExtra)
+library(RColorBrewer)
 
 ```
 
@@ -38,7 +40,7 @@ Model results and validation:
 
 
 
-Here we read in the future percent summer inundation values
+Here we read in the future percent summer inundation values. We first plot the rasters of the different scenarios and then we convert the raster stack to a data frame so that we can plot the distribution of values. The box plot labeled 'a' will be plotted with the box plots 'b' and 'c' in the 2nd and 3rd code chunks to show how inundation, sp height, and prob of LRFF change with the different scenarios.
 
 ```{r}
 
@@ -65,6 +67,33 @@ dev.off()
 densityplot(perc_summ_inund_fut)
 bwplot(perc_summ_inund_fut)
 
+#convert to dataframe for better plotting and analysis
+df <- as.data.frame(perc_summ_inund_fut, xy = TRUE)
+names(df)[3:18] <- gsub(pattern = "perc_summ_inun_", replacement = "", x = names(df)[3:18])
+df <- df %>% 
+  pivot_longer(cols = 3:18, names_to = "scenario", values_to = "Inundation") %>% 
+  separate(col = "scenario", into = c("Year", "Dredge", "RCP", "climate"), sep = "_") %>% 
+  filter(climate == "normal")
+
+
+a <-  ggplot(data = df, mapping = aes(y = Inundation, x = Dredge, fill = RCP))+
+  geom_boxplot()+
+  facet_wrap(vars(Year))+
+  labs(x = NULL)+
+  theme(axis.title.x = element_text(size = 25),
+        axis.title.y = element_text(size = 25),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        strip.background = element_rect(colour = "black", fill = "white"),
+        strip.text.x = element_text(colour = "black", face = "bold", size = 25),
+        panel.background = element_rect(fill = NA),
+        panel.grid.major = element_line(colour = NA),
+        panel.border = element_rect(linetype = "solid", fill = NA),
+        legend.position = c(.99, .99),
+        legend.justification = c("right", "top"),
+        legend.text = element_text(size = 15),
+        legend.title = element_text(size = 20))
+
 ```
 
 
@@ -73,6 +102,31 @@ Here we read in the future spartina heights
 sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/sp_max_stack_fut.grd")
 
 plot(sp_max_stack_fut)
+
+#convert to dataframe for better plotting and analysis
+df <- as.data.frame(sp_max_stack_fut, xy = TRUE)
+names(df)[3:18] <- gsub(pattern = "sp_max_", replacement = "", x = names(df)[3:18])
+df <- df %>% 
+  pivot_longer(cols = 3:18, names_to = "scenario", values_to = "Height") %>% 
+  separate(col = "scenario", into = c("Year", "Dredge", "RCP", "climate"), sep = "_") %>% 
+  filter(climate == "normal")
+
+
+b <-  ggplot(data = df, mapping = aes(y = Height, x = Dredge, fill = RCP))+
+  geom_boxplot()+
+  facet_wrap(vars(Year))+
+  labs(y = expression(paste("max ", italic("S. foliosa "), "height (cm)", sep = " ")))+
+  labs(x = NULL)+
+  theme(axis.title.x = element_text(size = 25),
+        axis.title.y = element_text(size = 25),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        strip.background = element_rect(colour = "black", fill = "white"),
+        strip.text.x = element_text(colour = "black", face = "bold", size = 25),
+        panel.background = element_rect(fill = NA),
+        panel.grid.major = element_line(colour = NA),
+        panel.border = element_rect(linetype = "solid", fill = NA),
+        legend.position = "none")
 
 ```
 
@@ -120,6 +174,35 @@ d <- ggplot(data = railpred, aes(fill = railprob))+
 
 ggsave(d, filename = "railProbFut.TIFF", dpi = 300, width = 25, height = 15, units = "cm", compression = "lzw")
 
+
+#convert to dataframe for better plotting and analysis
+df <- railpred
+df <- df %>%  
+  filter(yrtype == "normal")
+
+
+c <- ggplot(data = df, mapping = aes(y = predict, x = sediment, fill = RCP))+
+  geom_boxplot()+
+  facet_wrap(vars(year))+
+  labs(y = "LFRR prob of occurrence")+
+  theme(axis.title.x = element_text(size = 25),
+        axis.title.y = element_text(size = 25),
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        strip.background = element_rect(colour = "black", fill = "white"),
+        strip.text.x = element_text(colour = "black", face = "bold", size = 25),
+        panel.background = element_rect(fill = NA),
+        panel.grid.major = element_line(colour = NA),
+        panel.border = element_rect(linetype = "solid", fill = NA),
+        legend.position = "none")
+
+
+margin = theme(plot.margin = unit(c(5,7,5,5), "mm"))
+p<-arrangeGrob(
+  a + margin, b+ margin, c+ margin,
+  nrow = 3)
+ggsave("figx.tiff", plot = p, dpi = 300, width = 10, height = 20, compression = "lzw")
+
 ```
 
 
@@ -134,13 +217,30 @@ baseline <- bird_dat_inundation_2015_Delft3D_4 %>%
 chng <- left_join(railpred, baseline, by = "UID") %>% 
   mutate(change = railprob - railprob2015)
 
-ggplot(data = chng, aes(fill = change))+
+myPalette <- colorRampPalette(brewer.pal(9, "RdBu"))
+
+fig <- ggplot(data = chng, aes(fill = change))+
   geom_sf(color = NA)+
-  labs(title = "Rail Probablity")+
+  labs(title = "Change in Rail Probablity from 2015")+
   theme(axis.text.x = element_blank(),
         axis.text.y = element_blank(),
-        axis.ticks = element_blank())+
-  facet_grid(rows=vars(year), cols=vars(RCP, sediment))
+        axis.ticks = element_blank(),
+        title = element_text(size = 30), 
+        panel.grid.major=element_line(colour="transparent"),
+        panel.background = element_blank(),
+        axis.text = element_blank(),
+        strip.text = element_text(size = 25),
+        strip.background = element_rect(fill = "grey99", colour="black"),
+        legend.title = element_text(size = 25),
+        legend.text=element_text(size=20))+
+  scale_fill_gradientn(colours = myPalette(100))+
+  facet_grid(rows=vars(year), cols=vars(RCP, sediment), labeller = as_labeller(c("RCP4" = "RCP 4.5", "RCP8" = "RCP 8.5",
+                                                               "dre" = "Dredge", "ND" = "No Dredge",
+                                                               "2050" = "2050", "2100" = "2100")))
+
+
+ggsave("fig1.tiff", plot = fig, dpi = 300, width = 20, height = 20, compression = "lzw")
+
 
 
 summary <- chng %>% 
