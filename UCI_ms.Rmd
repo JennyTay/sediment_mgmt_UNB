@@ -33,6 +33,16 @@ This work was funded by the National Oceanic and Atmospheric Association (NOAA) 
 Introduction
 ===============================================================
 
+
+Recent research has predicted that coastal salt marshes will transition to mudflat and sub-tidal due to increased sea level rise [@Thorne2018].  The concern that that march accretion rates will be unable to offset the increasing rates of sea level rise as the climate warms.  This is particularly problematic in highly urbanized regions because transgression opportunities are stifled due to the hardened landscape surrounding most marshes. A major concern that stems from losing salt marsh is the impact to organisms that rely on these habitats such as the Light-footed Ridgway's rail (Veloz et al., 2013; Zhang & Gorelick, 2014; Hunter et al., 2017; Rosencranz et al., 2018).  <!--- note what the outcomes of these studies were--->   
+
+
+Some more recent studies has suggested that perhaps salt marshes are more capable of surviving SLR (Kirwan paper). Salt marsh stability is driven by marine water levels and freshwater inputs that contribute inorganic sediment, and decaying organic matter on the marsh surface.  Dynamic feedback loops between primary productivity and higher relative water levels (to an optimum) maintain marsh surface elevations (Kirwan & Guntenspergen, 2012) with more sediment trapping and deposition on the marsh plain from the increased duration of settling time and the increased density of stems which trap the sediment (Kirwan & Murray, 2007).  
+
+While different studies have considered the many different variables that impact salt marsh accretion, an important process that has received much less attention is the contribution of watershed sediment to the marsh surface elevation. In some regions, sediment contributions from the watershed is the dominate process that contributes to marsh accretion.  We investigate the implications for a salt marsh bird in a southern California watershed that has historically received so much sediment from the developing watersheds that dredging practices were initiated to reduce the sediment influx that threatened to fill in the marsh.  To accomplish this, we develop and apply a marsh surface model that incorporates watershed inputs and a biological model that predicts the vegetation and habitat suitability necessary to support the regions endangered salt marsh obligate bird.  
+
+
+
 Urban estuaries are embayments open to the coastal ocean that receive freshwater runoff, are characterized by urban development around the embayment and/or in the watershed [@Pritchard1967], and are under significant pressure related to land reclamation, waste discharges, and climate change [@lotze2006]. Urban estuaries represent critical coastal habitats that support ecosystems including birds, fish and invertebrates [@mclusky2004]. Additionally, urban estuaries provide benefits to society (or ecosystem services) including recreational opportunities for coastal communities, pollutant and nutrient processing, support for the shipping, defense and fishing industries, and urban amenities such as access to wildlife, seafood, and open spaces [@barbier2011]. These many benefits are often in competition and need to be balanced, thus posing challenges for management [@elliott2011].
 
 
@@ -41,11 +51,10 @@ Urban estuaries are embayments open to the coastal ocean that receive freshwater
 
 
 
-High resolution dynamic coastal modeling has been found to lead to better conservation planning [@Runting2013].  Salt marsh stability is driven by marine water levels and freshwater inputs that contribute inorganic sediment, and decaying organic matter on the marsh surface.  Dynamic feedback loops between primary productivity and higher relative water levels (to an optimum) maintain marsh surface elevations (Kirwan & Guntenspergen, 2012) with more sediment trapping and deposition on the marsh plain from the increased duration of settling time and the increased density of stems which trap the sediment (Kirwan & Murray, 2007).  
+High resolution dynamic coastal modeling has been found to lead to better conservation planning [@Runting2013].    
 
-Some reserach has determined that coastal salt marshes at at risk of transitioning to mudflat and subtidal due to increased sea level rise [@Thorne2018] while other studies has suggested that perhaps salt marshes are more capable of suriving SLR (Kirwan paper). Efforts to project the impact climate change on Rallus spp. often focus on sea level rise as the driving force behind habitat loss (Veloz et al., 2013; Zhang & Gorelick, 2014; Hunter et al., 2017; Rosencranz et al., 2018).  <!--- note what the outcomes of these studies were---> However, this prior reserach has failed to consider the massive impacts that sediment management practicies have in the salt marsh.  In urban estuaries there are often a lot of sediment managemnt practices either in the marsh or in the watershed that impact marsh accretion.  These practices could be manipulated and used to alieviate the pressures of sea level rise. Models investing marsh vulnerability to sea level rise have not considered the influence of dredging practices on salt marsh persistence.
 
-We investigate the importance of salt marsh dredging The goals of this reserach were to determine if sediment management practices can be used in conservation planning for salt marsh habitats.  We use a combination of marsh surface modeling and biological suitability to evaluate the salt marsh condition in a series of future scenarios that consider global climate change and local weather pattersn (el nino dynamics). We incorportate marsh basin dredging into each scenario to determine how it changes the salt marsh surface elevation and habitat. 
+
 
 
 
@@ -117,8 +126,10 @@ $$logit(p) \pm 1.96(\text{SE}(logit(p)))  $$
 
 ```{r echo=FALSE}
 
-load("C:/Users/JennyT/Documents/LitReview/UCI/working data/mdl_pct_rail_pres.rda")
+
+load("mdl_pct_rail_pres.rda")
 #calculate the standard error of the predicted value ie SE(logit(P)) = sqrt((SE*B0^2)+(x^2*SE*B1^2)....)
+
 #the 95% CI is logit(P)+/-1.96(SE(logit(P)))
 #then we do the inverse logit to go from upper and lower bounds in log odds, to upper and lower bounds of probability
 
@@ -145,12 +156,6 @@ Surveys for the BSS occur every five years and we used the results from the most
 
 
 
-##### Marsh surface modeling
-
-<!---Delft 3D section ---> 
-
-
-
 
 
 ##### Habitat suitability
@@ -161,14 +166,11 @@ We applied both biological models to the future scenarios that were modeled usin
 Results
 ===========================================================
 
+#### Model Results
 
-<!---  results for the models used, S. foliosa max model, and probability of occurrence for the LFRR  --->
+<!---  results for the models used: S. foliosa max model, and probability of occurrence for the LFRR.  For the SPSP max model, report the performance when used on the 2012 calibration data (false positives or false negatives and the R2.  For the rail model, validate based on the 2015 delft 3d model)  --->
 
-```{r}
-load("C:/Users/JennyT/Documents/LitReview/UCI/working data/SPSP_MAX_model.rda")
-summary(mdl_sp_max) #need to make this into a nice table
-
-```
+The 
 
 
 <!--- Spatial maps of %inundation, S foliosa, LFRR suitability, BSS suitability with 2 scenarios, 

@@ -14,6 +14,7 @@ library(rasterVis)
 library(sf)
 library(gridExtra)
 library(RColorBrewer)
+library(broom)
 
 ```
 
@@ -76,6 +77,7 @@ df <- df %>%
   filter(climate == "normal")
 
 
+
 a <-  ggplot(data = df, mapping = aes(y = Inundation, x = Dredge, fill = RCP))+
   geom_boxplot()+
   facet_wrap(vars(Year))+
@@ -104,15 +106,15 @@ sp_max_stack_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/worki
 plot(sp_max_stack_fut)
 
 #convert to dataframe for better plotting and analysis
-df <- as.data.frame(sp_max_stack_fut, xy = TRUE)
-names(df)[3:18] <- gsub(pattern = "sp_max_", replacement = "", x = names(df)[3:18])
-df <- df %>% 
+df2 <- as.data.frame(sp_max_stack_fut, xy = TRUE)
+names(df2)[3:18] <- gsub(pattern = "sp_max_", replacement = "", x = names(df2)[3:18])
+df2 <- df2 %>% 
   pivot_longer(cols = 3:18, names_to = "scenario", values_to = "Height") %>% 
   separate(col = "scenario", into = c("Year", "Dredge", "RCP", "climate"), sep = "_") %>% 
   filter(climate == "normal")
 
 
-b <-  ggplot(data = df, mapping = aes(y = Height, x = Dredge, fill = RCP))+
+b <-  ggplot(data = df2, mapping = aes(y = Height, x = Dredge, fill = RCP))+
   geom_boxplot()+
   facet_wrap(vars(Year))+
   labs(y = expression(paste("max ", italic("S. foliosa "), "height (cm)", sep = " ")))+
@@ -176,12 +178,12 @@ ggsave(d, filename = "railProbFut.TIFF", dpi = 300, width = 25, height = 15, uni
 
 
 #convert to dataframe for better plotting and analysis
-df <- railpred
-df <- df %>%  
+df3 <- railpred
+df3 <- df3 %>%  
   filter(yrtype == "normal")
 
 
-c <- ggplot(data = df, mapping = aes(y = predict, x = sediment, fill = RCP))+
+c <- ggplot(data = df3, mapping = aes(y = predict, x = sediment, fill = RCP))+
   geom_boxplot()+
   facet_wrap(vars(year))+
   labs(y = "LFRR prob of occurrence")+
@@ -215,11 +217,11 @@ baseline <- bird_dat_inundation_2015_Delft3D_4 %>%
   dplyr::select(UID, railprob2015, pct_rail_pres)
 
 chng <- left_join(railpred, baseline, by = "UID") %>% 
-  mutate(change = railprob - railprob2015)
+  mutate(Change = railprob - railprob2015)
 
 myPalette <- colorRampPalette(brewer.pal(9, "RdBu"))
 
-fig <- ggplot(data = chng, aes(fill = change))+
+fig <- ggplot(data = chng, aes(fill = Change))+
   geom_sf(color = NA)+
   labs(title = "Change in Rail Probablity from 2015")+
   theme(axis.text.x = element_blank(),
@@ -245,8 +247,22 @@ ggsave("fig1.tiff", plot = fig, dpi = 300, width = 20, height = 20, compression 
 
 summary <- chng %>% 
   group_by(year, RCP, sediment) %>% 
-  summarise(mean = mean(change, na.rm = TRUE),
-            firstquartile = quantile(change, probs = 0.25, na.rm = TRUE),
-            thirdQualtile = quantile(change, probs = 0.75, na.rm = TRUE))
+  summarise(mean = mean(Change, na.rm = TRUE),
+            firstquartile = quantile(Change, probs = 0.25, na.rm = TRUE),
+            thirdQualtile = quantile(Change, probs = 0.75, na.rm = TRUE))
+
+```
+
+
+results for the models used: S. foliosa max model, and probability of occurrence for the LFRR.  For the SPSP max model, report the performance when used on the 2012 calibration data (false positives or false negatives and the R2.  For the rail model, validate based on the 2015 delft 3d model)
+
+```{r}
+load("SPSP_MAX_model.rda")
+summary(mdl_sp_max) #need to make this into a nice table
+coefficients(mdl_sp_max)[5]
+
+
+load("mdl_pct_rail_pres.rda")
+knitr::kable(tidy(mdl_pct_rail_pres), caption = "The mtcars data.")
 
 ```

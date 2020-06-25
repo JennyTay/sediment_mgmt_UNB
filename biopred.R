@@ -162,7 +162,14 @@ library(boot)
 # if highgt > 0, want to model the value
 
 ggplot(data = veg, mapping = aes(x= SAPA_MAX))+
-  geom_histogram(binwidth = 5)
+  geom_histogram(binwidth = 5, color = "grey70")+
+  labs(y= "Count", x = "Maximum height (cm)")+
+  theme(axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20),
+        title = element_text(size = 30), 
+        panel.grid.major=element_line(colour="grey80"),
+        panel.background = element_blank(),
+        panel.border = element_rect(colour = "black", fill=NA, size=1))
 var(veg$SPSP_MAX) #much much larger - probabaly want to do a zero inflated negative bionmial
 mean(veg$SPSP_MAX)
 
