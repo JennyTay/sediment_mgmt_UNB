@@ -46,7 +46,7 @@ Here we read in the future percent summer inundation values. We first plot the r
 ```{r}
 
 perc_summ_inund_fut <- raster::stack("C:/Users/JennyT/Documents/LitReview/UCI/working data/perc_summ_inund_fut.grd")
-plot(perc_summ_inund_fut)
+plot(perc_summ_inund_fut, y = c(13,15))
 data.frame(cellStats(perc_summ_inund_fut, quantile))
 
 
@@ -183,7 +183,7 @@ df3 <- df3 %>%
   filter(yrtype == "normal")
 
 
-c <- ggplot(data = df3, mapping = aes(y = predict, x = sediment, fill = RCP))+
+c <- ggplot(data = df3, mapping = aes(y = railprob, x = sediment, fill = RCP))+
   geom_boxplot()+
   facet_wrap(vars(year))+
   labs(y = "LFRR prob of occurrence")+
@@ -241,7 +241,7 @@ fig <- ggplot(data = chng, aes(fill = Change))+
                                                                "2050" = "2050", "2100" = "2100")))
 
 
-ggsave("fig1.tiff", plot = fig, dpi = 300, width = 20, height = 20, compression = "lzw")
+ggsave("fig1.tiff", plot = fig, dpi = 300, width = 20, height = 15, compression = "lzw")
 
 
 
@@ -263,6 +263,6 @@ coefficients(mdl_sp_max)[5]
 
 
 load("mdl_pct_rail_pres.rda")
-knitr::kable(tidy(mdl_pct_rail_pres), caption = "The mtcars data.")
+summary(mdl_pct_rail_pres)
 
 ```

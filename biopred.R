@@ -148,7 +148,8 @@ ggpairs(data = veg, columns = 61:73)
 ggplot(data = veg, mapping = aes(x = summ_inu_pct, y = SPSP_MAX))+
   geom_point(alpha = 1/3)+
   labs(x = "Summer Inundation (%)", y = "Height (cm)", title = "Maximum S. foliosa height")+
-  geom_smooth(method = "glm",formula = y~x+I(x^2))
+  geom_smooth(method = "glm",formula = y~x+I(x^2))+
+  xlim(c(0,0.5))
 
 
 library(pscl)
@@ -416,6 +417,11 @@ elv_m_2050_ND_RCP4 <- crop(raster("RCP4_no_dredging_2050/RCP4_no_dredging_2050.T
 #No dredging, 0.2911m  SLR, elevation is in MSL
 elv_m_2050_ND_RCP8 <- crop(raster("RCP8_2050_no_dredging/RCP8_2050_no_dredging.TIF"), extent)
 
+#No dredging, 1.09728m SLR, 66th quantile streamflow 
+
+#dredging, 1.09728m SLR, 66th quantile streamflow 
+
+
 
 #Future Predictions: 2100
 
@@ -431,7 +437,10 @@ elv_m_2100_ND_RCP4 <- crop(raster("RCP4_no_dredging_2100/RCP4_2100_no_dredging.T
 #No dredging, 1.09728m  SLR, elevation is in MSL
 elv_m_2100_ND_RCP8 <- crop(raster("RCP8_2100_no_dredging/BL_2100.TIF"), extent)
 
+#No dredging, 1.09728m SLR, 66th quantile streamflow 
 
+
+#dredging, 1.09728m SLR, 66th quantile streamflow 
 
 
 
