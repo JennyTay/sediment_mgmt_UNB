@@ -1062,7 +1062,7 @@ perc_summ_inund_fut <- stack(inun_metrics_2050_ND_RCP4_normal[[6]], inun_metrics
                              inun_metrics_2100_dre_RCP4_normal[[6]], inun_metrics_2100_dre_RCP4_elnino[[6]],
                              inun_metrics_2100_dre_RCP8_normal[[6]], inun_metrics_2100_dre_RCP8_elnino[[6]],
                              inun_metrics_2100_ND_RCP4_normal_Q66[[6]], inun_metrics_2100_ND_RCP4_elnino_Q66[[6]],
-                             inun_metrics_2100_dre_RCP8_normal_Q33[[6]], inun_metrics_2100_dre_RCP8_elnino_Q33[[6]],
+                             inun_metrics_2100_dre_RCP8_normal_Q33[[6]], inun_metrics_2100_dre_RCP8_elnino_Q33[[6]]
                              )
 
 names(perc_summ_inund_fut) <- c("perc_summ_inun_2050_ND_RCP4_normal_Q50", "perc_summ_inun_2050_ND_RCP4_elnino_Q50",
