@@ -446,6 +446,32 @@ elv_m_2100_ND_RCP4_Q66 <- crop(raster("RCP4_Q66_no_dredging_2100/RCP4_Q66_no_dre
 elv_m_2100_dre_RCP8_Q33 <- crop(raster("RCP8_Q33_dredging_2100/RCP8_Q33_dredging_2100/RCP8_Q33_dredging_2100.TIF"), extent)
 
 
+#Coupled model, dredging, 0.39624m SLR, elevation is in MSL
+CP_elv_m_2100_dre_RCP4 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_D_2100.TIF"), extent)
+
+#Coupled model, dredging, 1.09728m  SLR, elevation is in MSL
+CP_elv_m_2100_dre_RCP8 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_2100"), extent)
+
+#Coupled model, dredging, 1.09728m SLR, 33th quantile streamflow
+CP_elv_m_2100_dre_RCP8_Q33 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_Q33_2100"), extent)
+
+#Coupled model, No dredging, 0.39624m SLR, elevation is in MSL
+CP_elv_m_2100_ND_RCP4 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_2100"), extent)
+
+#Coupled model, No dredging, 1.09728m  SLR, elevation is in MSL
+CP_elv_m_2100_ND_RCP8 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_ND_2100"), extent)
+
+#Coupled model, No dredging, 0.39624m SLR, 66th quantile streamflow
+CP_elv_m_2100_ND_RCP4_Q66 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_Q66_2100"), extent)
+
+
+
+
+
+
+
+
+
 #inundation rasterStack function
 #subtract water level from each pixel value (ele - lev)  for each waterlevel value (1:nrow(lev))
 
@@ -760,6 +786,147 @@ inun_metrics_2100_nodredge_RCP4_elnino_Q66 <- writeRaster(inun_metrics_2100_nodr
 
 
 
+#Coupled model, dredging, 0.39624m SLR, 2100, normal, MSL
+CP_summ_2100_dredge_RCP4_normal <- inundation(elv = CP_elv_m_2100_dre_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="S",])
+names(CP_summ_2100_dredge_RCP4_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                               "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP4_normal <- inundation(elv = CP_elv_m_2100_dre_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="W",])
+names(CP_wint_2100_dredge_RCP4_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                               "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP4_normal <- stack(CP_summ_2100_dredge_RCP4_normal, CP_wint_2100_dredge_RCP4_normal, CP_elv_m_2100_dre_RCP4 )
+names(CP_inun_metrics_2100_dredge_RCP4_normal[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP4_normal <- writeRaster(CP_inun_metrics_2100_dredge_RCP4_normal, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_normal_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, dredging, 0.39624m SLR, 2100, El Nino, MSL
+CP_summ_2100_dredge_RCP4_elnino <- inundation(elv = CP_elv_m_2100_dre_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="S",])
+names(CP_summ_2100_dredge_RCP4_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP4_elnino <- inundation(elv = CP_elv_m_2100_dre_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="W",])
+names(CP_wint_2100_dredge_RCP4_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP4_elnino <- stack(CP_summ_2100_dredge_RCP4_elnino, CP_wint_2100_dredge_RCP4_elnino, CP_elv_m_2100_dre_RCP4 )
+names(CP_inun_metrics_2100_dredge_RCP4_elnino[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP4_elnino <- writeRaster(CP_inun_metrics_2100_dredge_RCP4_elnino, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_elnino_inun_metrics_.grd", overwrite=TRUE)
+
+
+#Coupled model, dredging, 1.09728m  SLR, 2100, normal, MSL
+CP_summ_2100_dredge_RCP8_normal <- inundation(elv = CP_elv_m_2100_dre_RCP8 , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="S",])
+names(CP_summ_2100_dredge_RCP8_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP8_normal <- inundation(elv = CP_elv_m_2100_dre_RCP8 , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="W",])
+names(CP_wint_2100_dredge_RCP8_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP8_normal <- stack(CP_summ_2100_dredge_RCP8_normal, CP_wint_2100_dredge_RCP8_normal, CP_elv_m_2100_dre_RCP8 )
+names(CP_inun_metrics_2100_dredge_RCP8_normal[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP8_normal <- writeRaster(CP_inun_metrics_2100_dredge_RCP8_normal, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, dredging, 1.09728m  SLR, 2100, El Nino, MSL
+CP_summ_2100_dredge_RCP8_elnino <- inundation(elv = CP_elv_m_2100_dre_RCP8 , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="S",])
+names(CP_summ_2100_dredge_RCP8_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP8_elnino <- inundation(elv = CP_elv_m_2100_dre_RCP8 , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="W",])
+names(CP_wint_2100_dredge_RCP8_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP8_elnino <- stack(CP_summ_2100_dredge_RCP8_elnino, CP_wint_2100_dredge_RCP8_elnino, CP_elv_m_2100_dre_RCP8 )
+names(CP_inun_metrics_2100_dredge_RCP8_elnino[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP8_elnino <- writeRaster(CP_inun_metrics_2100_dredge_RCP8_elnino, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_inun_metrics_.grd", overwrite=TRUE)
+
+
+#Coupled model, dredging, 1.09728m SLR, 2100,  normal, MSL, Q33
+CP_summ_2100_dredge_RCP8_normal_Q33 <- inundation(elv = CP_elv_m_2100_dre_RCP8_Q33  , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="S",])
+names(CP_summ_2100_dredge_RCP8_normal_Q33) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP8_normal_Q33 <- inundation(elv = CP_elv_m_2100_dre_RCP8_Q33  , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="W",])
+names(CP_wint_2100_dredge_RCP8_normal_Q33) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP8_normal_Q33 <- stack(CP_summ_2100_dredge_RCP8_normal_Q33, CP_wint_2100_dredge_RCP8_normal_Q33, CP_elv_m_2100_dre_RCP8_Q33  )
+names(CP_inun_metrics_2100_dredge_RCP8_normal_Q33[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP8_normal_Q33 <- writeRaster(CP_inun_metrics_2100_dredge_RCP8_normal_Q33, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, dredging, 1.09728m SLR, 2100,  El Nino, MSL, Q33
+CP_summ_2100_dredge_RCP8_elnino_Q33 <- inundation(elv = CP_elv_m_2100_dre_RCP8_Q33  , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="S",])
+names(CP_summ_2100_dredge_RCP8_elnino_Q33) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                                "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_dredge_RCP8_elnino_Q33 <- inundation(elv = CP_elv_m_2100_dre_RCP8_Q33  , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="W",])
+names(CP_wint_2100_dredge_RCP8_elnino_Q33) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                                "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_dredge_RCP8_elnino_Q33 <- stack(CP_summ_2100_dredge_RCP8_elnino_Q33, CP_wint_2100_dredge_RCP8_elnino_Q33, CP_elv_m_2100_dre_RCP8_Q33  )
+names(CP_inun_metrics_2100_dredge_RCP8_elnino_Q33[[15]]) <- "elv_m"
+CP_inun_metrics_2100_dredge_RCP8_elnino_Q33 <- writeRaster(CP_inun_metrics_2100_dredge_RCP8_elnino_Q33, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_Q33_inun_metrics_.grd", overwrite=TRUE)
+
+
+#Coupled model, No dredging, 0.39624m SLR, 2100, normal, MSL
+CP_summ_2100_nodredge_RCP4_normal <- inundation(elv = CP_elv_m_2100_ND_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="S",])
+names(CP_summ_2100_nodredge_RCP4_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                            "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP4_normal <- inundation(elv = CP_elv_m_2100_ND_RCP4 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="W",])
+names(CP_wint_2100_nodredge_RCP4_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                            "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP4_normal <- stack(CP_summ_2100_nodredge_RCP4_normal, CP_wint_2100_nodredge_RCP4_normal, CP_elv_m_2100_ND_RCP4 )
+names(CP_inun_metrics_2100_nodredge_RCP4_normal[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP4_normal <- writeRaster(CP_inun_metrics_2100_nodredge_RCP4_normal, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, No dredging, 0.39624m SLR, 2100, El Nino, MSL
+CP_summ_2100_nodredge_RCP4_elnino <- inundation(elv = CP_elv_m_2100_ND_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="S",])
+names(CP_summ_2100_nodredge_RCP4_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                              "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP4_elnino <- inundation(elv = CP_elv_m_2100_ND_RCP4 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="W",])
+names(CP_wint_2100_nodredge_RCP4_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                              "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP4_elnino <- stack(CP_summ_2100_nodredge_RCP4_elnino, CP_wint_2100_nodredge_RCP4_elnino, CP_elv_m_2100_ND_RCP4 )
+names(CP_inun_metrics_2100_nodredge_RCP4_elnino[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP4_elnino <- writeRaster(CP_inun_metrics_2100_nodredge_RCP4_elnino, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_inun_metrics_.grd", overwrite=TRUE)
+
+
+#Coupled model, No dredging, 1.09728m  SLR, 2100, normal, MSL
+CP_summ_2100_nodredge_RCP8_normal <- inundation(elv = CP_elv_m_2100_ND_RCP8  , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="S",])
+names(CP_summ_2100_nodredge_RCP8_normal) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                              "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP8_normal <- inundation(elv = CP_elv_m_2100_ND_RCP8  , lev = lev_2100_normal_RCP8[lev_2100_normal_RCP8$season=="W",])
+names(CP_wint_2100_nodredge_RCP8_normal) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                              "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP8_normal <- stack(CP_summ_2100_nodredge_RCP8_normal, CP_wint_2100_nodredge_RCP8_normal, CP_elv_m_2100_ND_RCP8  )
+names(CP_inun_metrics_2100_nodredge_RCP8_normal[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP8_normal <- writeRaster(CP_inun_metrics_2100_nodredge_RCP8_normal, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_normal_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, No dredging, 1.09728m  SLR, 2100, El Nino, MSL
+CP_summ_2100_nodredge_RCP8_elnino <- inundation(elv = CP_elv_m_2100_ND_RCP8  , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="S",])
+names(CP_summ_2100_nodredge_RCP8_elnino) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                              "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP8_elnino <- inundation(elv = CP_elv_m_2100_ND_RCP8  , lev = lev_2100_elnino_RCP8[lev_2100_elnino_RCP8$season=="W",])
+names(CP_wint_2100_nodredge_RCP8_elnino) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                              "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP8_elnino <- stack(CP_summ_2100_nodredge_RCP8_elnino, CP_wint_2100_nodredge_RCP8_elnino, CP_elv_m_2100_ND_RCP8  )
+names(CP_inun_metrics_2100_nodredge_RCP8_elnino[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP8_elnino <- writeRaster(CP_inun_metrics_2100_nodredge_RCP8_elnino, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_elnino_inun_metrics_.grd", overwrite=TRUE)
+
+
+#Coupled model, No dredging, 0.39624m SLR, 2100,  normal, MSL, Q66
+CP_summ_2100_nodredge_RCP4_normal_Q66 <- inundation(elv = CP_elv_m_2100_ND_RCP4_Q66 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="S",])
+names(CP_summ_2100_nodredge_RCP4_normal_Q66) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                              "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP4_normal_Q66 <- inundation(elv = CP_elv_m_2100_ND_RCP4_Q66 , lev = lev_2100_normal_RCP4[lev_2100_normal_RCP4$season=="W",])
+names(CP_wint_2100_nodredge_RCP4_normal_Q66) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                              "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP4_normal_Q66 <- stack(CP_summ_2100_nodredge_RCP4_normal_Q66, CP_wint_2100_nodredge_RCP4_normal_Q66, CP_elv_m_2100_ND_RCP4_Q66 )
+names(CP_inun_metrics_2100_nodredge_RCP4_normal_Q66[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP4_normal_Q66 <- writeRaster(CP_inun_metrics_2100_nodredge_RCP4_normal_Q66, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_Q66_inun_metrics_.grd", overwrite=TRUE)
+
+#Coupled model, No dredging, 0.39624m SLR, 2100,  El Nino, MSL, Q66
+CP_summ_2100_nodredge_RCP4_elnino_Q66 <- inundation(elv = CP_elv_m_2100_ND_RCP4_Q66 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="S",])
+names(CP_summ_2100_nodredge_RCP4_elnino_Q66) <- c("summ_avg_ht_above_m", "summ_avg_ht_below_m", "summ_avg_ht", 
+                                                  "summ_max_ht_above_wl", "summ_max_depth_below_wl", "summ_inu_pct", "summ_inu_pct_sq")
+CP_wint_2100_nodredge_RCP4_elnino_Q66 <- inundation(elv = CP_elv_m_2100_ND_RCP4_Q66 , lev = lev_2100_elnino_RCP4[lev_2100_elnino_RCP4$season=="W",])
+names(CP_wint_2100_nodredge_RCP4_elnino_Q66) <- c("wint_avg_ht_above_m", "wint_avg_ht_below_m", "wint_avg_ht", 
+                                                  "wint_max_ht_above_wl", "wint_max_depth_below_wl", "wint_inu_pct", "wint_inu_pct_sq")
+CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66 <- stack(CP_summ_2100_nodredge_RCP4_elnino_Q66, CP_wint_2100_nodredge_RCP4_elnino_Q66, CP_elv_m_2100_ND_RCP4_Q66 )
+names(CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66[[15]]) <- "elv_m"
+CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66 <- writeRaster(CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_Q66_inun_metrics_.grd", overwrite=TRUE)
+
+
+
+
+
 
 # 2050 elvations
 
@@ -1007,6 +1174,43 @@ sp_max_2100_dre_RCP8_elnino_Q33 <- spsp_predict(rasterstack = inun_metrics_2100_
 
 inun_metrics_2100_dre_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd")
 sp_max_2100_dre_RCP8_normal_Q33 <- spsp_predict(rasterstack = inun_metrics_2100_dre_RCP8_normal_Q33)
+
+CP_inun_metrics_2100_dredge_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_normal_inun_metrics_.grd")
+sp_max_2100_dre_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP4_normal)
+
+CP_inun_metrics_2100_dredge_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_elnino_inun_metrics_.grd")
+sp_max_2100_dre_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP4_elnino)
+
+CP_inun_metrics_2100_dredge_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_normal)
+
+CP_inun_metrics_2100_dredge_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_elnino)
+
+CP_inun_metrics_2100_dredge_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_normal_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_normal_Q33)
+
+CP_inun_metrics_2100_dredge_RCP8_elnino_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_Q33_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_elnino_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_elnino_Q33)
+
+CP_inun_metrics_2100_nodredge_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_normal)
+
+CP_inun_metrics_2100_nodredge_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_elnino)
+
+CP_inun_metrics_2100_nodredge_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_normal_inun_metrics_.grd")
+sp_max_2100_ND_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP8_normal)
+
+CP_inun_metrics_2100_nodredge_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_elnino_inun_metrics_.grd")
+sp_max_2100_ND_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP8_elnino)
+
+CP_inun_metrics_2100_nodredge_RCP4_normal_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_Q66_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_normal_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_normal_Q66)
+
+CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_Q66_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_elnino_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66)
+
 
 
 
