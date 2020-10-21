@@ -445,24 +445,24 @@ elv_m_2100_ND_RCP4_Q66 <- crop(raster("RCP4_Q66_no_dredging_2100/RCP4_Q66_no_dre
 #dredging, 1.09728m SLR, 33th quantile streamflow 
 elv_m_2100_dre_RCP8_Q33 <- crop(raster("RCP8_Q33_dredging_2100/RCP8_Q33_dredging_2100/RCP8_Q33_dredging_2100.TIF"), extent)
 
-
+#the resolutions of the CP files are slightly different than the delft3d files, so need to resample to make them comprable#
 #Coupled model, dredging, 0.39624m SLR, elevation is in MSL
-CP_elv_m_2100_dre_RCP4 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_D_2100.TIF"), extent)
+CP_elv_m_2100_dre_RCP4 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP4_D_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 #Coupled model, dredging, 1.09728m  SLR, elevation is in MSL
-CP_elv_m_2100_dre_RCP8 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_2100"), extent)
+CP_elv_m_2100_dre_RCP8 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 #Coupled model, dredging, 1.09728m SLR, 33th quantile streamflow
-CP_elv_m_2100_dre_RCP8_Q33 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_Q33_2100"), extent)
+CP_elv_m_2100_dre_RCP8_Q33 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP8_D_Q33_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 #Coupled model, No dredging, 0.39624m SLR, elevation is in MSL
-CP_elv_m_2100_ND_RCP4 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_2100"), extent)
+CP_elv_m_2100_ND_RCP4 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 #Coupled model, No dredging, 1.09728m  SLR, elevation is in MSL
-CP_elv_m_2100_ND_RCP8 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP8_ND_2100"), extent)
+CP_elv_m_2100_ND_RCP8 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP8_ND_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 #Coupled model, No dredging, 0.39624m SLR, 66th quantile streamflow
-CP_elv_m_2100_ND_RCP4_Q66 <- crop(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_Q66_2100"), extent)
+CP_elv_m_2100_ND_RCP4_Q66 <- crop(resample(raster("Delft3D_WARMER_couple/WARMER_RCP4_ND_Q66_2100.TIF"), elv_m_2100_dre_RCP8_Q33), extent)
 
 
 
@@ -1175,41 +1175,41 @@ sp_max_2100_dre_RCP8_elnino_Q33 <- spsp_predict(rasterstack = inun_metrics_2100_
 inun_metrics_2100_dre_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd")
 sp_max_2100_dre_RCP8_normal_Q33 <- spsp_predict(rasterstack = inun_metrics_2100_dre_RCP8_normal_Q33)
 
-CP_inun_metrics_2100_dredge_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_normal_inun_metrics_.grd")
-sp_max_2100_dre_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP4_normal)
+CP_inun_metrics_2100_dre_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_normal_inun_metrics_.grd")
+sp_max_2100_dre_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP4_normal)
 
-CP_inun_metrics_2100_dredge_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_elnino_inun_metrics_.grd")
-sp_max_2100_dre_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP4_elnino)
+CP_inun_metrics_2100_dre_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP4_elnino_inun_metrics_.grd")
+sp_max_2100_dre_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP4_elnino)
 
-CP_inun_metrics_2100_dredge_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_inun_metrics_.grd")
-sp_max_2100_dre_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_normal)
+CP_inun_metrics_2100_dre_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP8_normal)
 
-CP_inun_metrics_2100_dredge_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_inun_metrics_.grd")
-sp_max_2100_dre_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_elnino)
+CP_inun_metrics_2100_dre_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP8_elnino)
 
-CP_inun_metrics_2100_dredge_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd")
-sp_max_2100_dre_RCP8_normal_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_normal_Q33)
+CP_inun_metrics_2100_dre_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_normal_Q33_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_normal_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP8_normal_Q33)
 
-CP_inun_metrics_2100_dredge_RCP8_elnino_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_Q33_inun_metrics_.grd")
-sp_max_2100_dre_RCP8_elnino_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dredge_RCP8_elnino_Q33)
+CP_inun_metrics_2100_dre_RCP8_elnino_Q33 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_dredge_RCP8_elnino_Q33_inun_metrics_.grd")
+sp_max_2100_dre_RCP8_elnino_CP_Q33 <- spsp_predict(rasterstack = CP_inun_metrics_2100_dre_RCP8_elnino_Q33)
 
-CP_inun_metrics_2100_nodredge_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_inun_metrics_.grd")
-sp_max_2100_ND_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_normal)
+CP_inun_metrics_2100_ND_RCP4_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP4_normal)
 
-CP_inun_metrics_2100_nodredge_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_inun_metrics_.grd")
-sp_max_2100_ND_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_elnino)
+CP_inun_metrics_2100_ND_RCP4_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP4_elnino)
 
-CP_inun_metrics_2100_nodredge_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_normal_inun_metrics_.grd")
-sp_max_2100_ND_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP8_normal)
+CP_inun_metrics_2100_ND_RCP8_normal <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_normal_inun_metrics_.grd")
+sp_max_2100_ND_RCP8_normal_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP8_normal)
 
-CP_inun_metrics_2100_nodredge_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_elnino_inun_metrics_.grd")
-sp_max_2100_ND_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP8_elnino)
+CP_inun_metrics_2100_ND_RCP8_elnino <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP8_elnino_inun_metrics_.grd")
+sp_max_2100_ND_RCP8_elnino_CP <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP8_elnino)
 
-CP_inun_metrics_2100_nodredge_RCP4_normal_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_Q66_inun_metrics_.grd")
-sp_max_2100_ND_RCP4_normal_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_normal_Q66)
+CP_inun_metrics_2100_ND_RCP4_normal_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_normal_Q66_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_normal_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP4_normal_Q66)
 
-CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_Q66_inun_metrics_.grd")
-sp_max_2100_ND_RCP4_elnino_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_nodredge_RCP4_elnino_Q66)
+CP_inun_metrics_2100_ND_RCP4_elnino_Q66 <- stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/CP_2100_ND_RCP4_elnino_Q66_inun_metrics_.grd")
+sp_max_2100_ND_RCP4_elnino_CP_Q66 <- spsp_predict(rasterstack = CP_inun_metrics_2100_ND_RCP4_elnino_Q66)
 
 
 
@@ -1253,7 +1253,7 @@ inun_metrics_2050_dre_RCP8_normal_Q33 <- stack("C:/Users/Jenny/Documents/JennySC
 sp_max_2050_dre_RCP8_normal_Q33 <- spsp_predict(rasterstack = inun_metrics_2050_dre_RCP8_normal_Q33)
 
 
-
+#the extents of the CP_files are slightly different than the delft3d files.. need to fix
 #make stack of the %summer inundation
 perc_summ_inund_fut <- stack(inun_metrics_2050_ND_RCP4_normal[[6]], inun_metrics_2050_ND_RCP4_elnino[[6]],
                              inun_metrics_2050_ND_RCP8_normal[[6]], inun_metrics_2050_ND_RCP8_elnino[[6]],
@@ -1266,21 +1266,33 @@ perc_summ_inund_fut <- stack(inun_metrics_2050_ND_RCP4_normal[[6]], inun_metrics
                              inun_metrics_2100_dre_RCP4_normal[[6]], inun_metrics_2100_dre_RCP4_elnino[[6]],
                              inun_metrics_2100_dre_RCP8_normal[[6]], inun_metrics_2100_dre_RCP8_elnino[[6]],
                              inun_metrics_2100_ND_RCP4_normal_Q66[[6]], inun_metrics_2100_ND_RCP4_elnino_Q66[[6]],
-                             inun_metrics_2100_dre_RCP8_normal_Q33[[6]], inun_metrics_2100_dre_RCP8_elnino_Q33[[6]]
+                             inun_metrics_2100_dre_RCP8_normal_Q33[[6]], inun_metrics_2100_dre_RCP8_elnino_Q33[[6]],
+                             CP_inun_metrics_2100_dre_RCP4_normal[[6]], CP_inun_metrics_2100_dre_RCP4_elnino[[6]],
+                             CP_inun_metrics_2100_dre_RCP8_normal[[6]], CP_inun_metrics_2100_dre_RCP8_elnino[[6]],
+                             CP_inun_metrics_2100_dre_RCP8_normal_Q33[[6]], CP_inun_metrics_2100_dre_RCP8_elnino_Q33[[6]],
+                             CP_inun_metrics_2100_ND_RCP4_normal[[6]], CP_inun_metrics_2100_ND_RCP4_elnino[[6]],
+                             CP_inun_metrics_2100_ND_RCP8_normal[[6]], CP_inun_metrics_2100_ND_RCP8_elnino[[6]],
+                             CP_inun_metrics_2100_ND_RCP4_normal_Q66[[6]], CP_inun_metrics_2100_ND_RCP4_elnino_Q66[[6]] 
                              )
-
-names(perc_summ_inund_fut) <- c("perc_summ_inun_2050_ND_RCP4_normal_Q50", "perc_summ_inun_2050_ND_RCP4_elnino_Q50",
-                                "perc_summ_inun_2050_ND_RCP8_normal_Q50", "perc_summ_inun_2050_ND_RCP8_elnino_Q50",
-                                "perc_summ_inun_2050_dre_RCP4_normal_Q50", "perc_summ_inun_2050_dre_RCP4_elnino_Q50",
-                                "perc_summ_inun_2050_dre_RCP8_normal_Q50", "perc_summ_inun_2050_dre_RCP8_elnino_Q50",
-                                "perc_summ_inun_2050_ND_RCP4_normal_Q66", "perc_summ_inun_2050_ND_RCP4_elnino_Q66",
-                                "perc_summ_inun_2050_dre_RCP8_normal_Q33", "perc_summ_inuns_2050_dre_RCP8_elnino_Q33",
-                                "perc_summ_inun_2100_ND_RCP4_normal_Q50", "perc_summ_inun_2100_ND_RCP4_elnino_Q50",
-                                "perc_summ_inun_2100_ND_RCP8_normal_Q50", "perc_summ_inun_2100_ND_RCP8_elnino_Q50",
-                                "perc_summ_inun_2100_dre_RCP4_normal_Q50", "perc_summ_inun_2100_dre_RCP4_elnino_Q50",
-                                "perc_summ_inun_2100_dre_RCP8_normal_Q50", "perc_summ_inun_2100_dre_RCP8_elnino_Q50",
-                                "perc_summ_inun_2100_ND_RCP4_normal_Q66", "perc_summ_inun_2100_ND_RCP4_elnino_Q66",
-                                "perc_summ_inun_2100_dre_RCP8_normal_Q33", "perc_summ_inun_2100_dre_RCP8_elnino_Q33")
+#DL = delft3D, CP = coupled delft+warmer.
+names(perc_summ_inund_fut) <- c("DL_perc_summ_inun_2050_ND_RCP4_normal_Q50", "DL_perc_summ_inun_2050_ND_RCP4_elnino_Q50",
+                                "DL_perc_summ_inun_2050_ND_RCP8_normal_Q50", "DL_perc_summ_inun_2050_ND_RCP8_elnino_Q50",
+                                "DL_perc_summ_inun_2050_dre_RCP4_normal_Q50", "DL_perc_summ_inun_2050_dre_RCP4_elnino_Q50",
+                                "DL_perc_summ_inun_2050_dre_RCP8_normal_Q50", "DL_perc_summ_inun_2050_dre_RCP8_elnino_Q50",
+                                "DL_perc_summ_inun_2050_ND_RCP4_normal_Q66", "DL_perc_summ_inun_2050_ND_RCP4_elnino_Q66",
+                                "DL_perc_summ_inun_2050_dre_RCP8_normal_Q33", "DL_perc_summ_inuns_2050_dre_RCP8_elnino_Q33",
+                                "DL_perc_summ_inun_2100_ND_RCP4_normal_Q50", "DL_perc_summ_inun_2100_ND_RCP4_elnino_Q50",
+                                "DL_perc_summ_inun_2100_ND_RCP8_normal_Q50", "DL_perc_summ_inun_2100_ND_RCP8_elnino_Q50",
+                                "DL_perc_summ_inun_2100_dre_RCP4_normal_Q50", "DL_perc_summ_inun_2100_dre_RCP4_elnino_Q50",
+                                "DL_perc_summ_inun_2100_dre_RCP8_normal_Q50", "DL_perc_summ_inun_2100_dre_RCP8_elnino_Q50",
+                                "DL_perc_summ_inun_2100_ND_RCP4_normal_Q66", "DL_perc_summ_inun_2100_ND_RCP4_elnino_Q66",
+                                "DL_perc_summ_inun_2100_dre_RCP8_normal_Q33", "DL_perc_summ_inun_2100_dre_RCP8_elnino_Q33",
+                                "CP_perc_summ_inun_2100_dre_RCP4_normal_Q50", "CP_perc_summ_inun_2100_dre_RCP4_elnino_Q50",
+                                "CP_perc_summ_inun_2100_dre_RCP8_normal_Q50", "CP_perc_summ_inun_2100_dre_RCP8_elnino_Q50",
+                                "CP_perc_summ_inun_2100_dre_RCP8_normal_Q33", "CP_perc_summ_inun_2100_dre_RCP8_elnino_Q33",
+                                "CP_perc_summ_inun_2100_ND_RCP4_normal_Q50", "CP_perc_summ_inun_2100_ND_RCP4_elnino_Q50",
+                                "CP_perc_summ_inun_2100_ND_RCP8_normal_Q50", "CP_perc_summ_inun_2100_ND_RCP8_elnino_Q50",
+                                "CP_perc_summ_inun_2100_ND_RCP4_normal_Q66", "CP_perc_summ_inun_2100_ND_RCP4_elnino_Q66")
 
 writeRaster(perc_summ_inund_fut, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/perc_summ_inund_fut.grd", format = "raster", overwrite = TRUE)
 perc_summ_inund_fut <- raster::stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/perc_summ_inund_fut.grd")
@@ -1300,20 +1312,32 @@ sp_max_stack_fut <- stack(sp_max_2100_dre_RCP8_elnino, sp_max_2100_dre_RCP8_norm
                           sp_max_2050_ND_RCP8_elnino, sp_max_2050_ND_RCP8_normal,
                           sp_max_2050_ND_RCP4_elnino, sp_max_2050_ND_RCP4_normal,
                           sp_max_2050_dre_RCP8_elnino_Q33, sp_max_2050_dre_RCP8_normal_Q33,
-                          sp_max_2050_ND_RCP4_elnino_Q66, sp_max_2050_ND_RCP4_normal_Q66)
+                          sp_max_2050_ND_RCP4_elnino_Q66, sp_max_2050_ND_RCP4_normal_Q66,
+                          sp_max_2100_dre_RCP4_normal_CP, sp_max_2100_dre_RCP4_elnino_CP,
+                          sp_max_2100_dre_RCP8_normal_CP, sp_max_2100_dre_RCP8_elnino_CP,
+                          sp_max_2100_dre_RCP8_normal_CP_Q33, sp_max_2100_dre_RCP8_elnino_CP_Q33,
+                          sp_max_2100_ND_RCP4_normal_CP, sp_max_2100_ND_RCP4_elnino_CP,
+                          sp_max_2100_ND_RCP8_normal_CP, sp_max_2100_ND_RCP8_elnino_CP,
+                          sp_max_2100_ND_RCP4_normal_CP_Q66, sp_max_2100_ND_RCP4_elnino_CP_Q66)
 
-names(sp_max_stack_fut) <- c("sp_max_2100_dre_RCP8_elnino_Q50", "sp_max_2100_dre_RCP8_normal_Q50", 
-                             "sp_max_2100_dre_RCP4_elnino_Q50", "sp_max_2100_dre_RCP4_normal_Q50", 
-                             "sp_max_2100_ND_RCP8_elnino_Q50", "sp_max_2100_ND_RCP8_normal_Q50",
-                             "sp_max_2100_ND_RCP4_elnino_Q50", "sp_max_2100_ND_RCP4_normal_Q50",
-                             "sp_max_2100_dre_RCP8_elnino_Q33", "sp_max_2100_dre_RCP8_normal_Q33",
-                             "sp_max_2100_ND_RCP4_elnino_Q66", "sp_max_2100_ND_RCP4_normal_Q66",
-                             "sp_max_2050_dre_RCP8_elnino_Q50", "sp_max_2050_dre_RCP8_normal_Q50", 
-                             "sp_max_2050_dre_RCP4_elnino_Q50", "sp_max_2050_dre_RCP4_normal_Q50", 
-                             "sp_max_2050_ND_RCP8_elnino_Q50", "sp_max_2050_ND_RCP8_normal_Q50",
-                             "sp_max_2050_ND_RCP4_elnino_Q50", "sp_max_2050_ND_RCP4_normal_Q50",
-                             "sp_max_2050_dre_RCP8_elnino_Q33", "sp_max_2050_dre_RCP8_normal_Q33",
-                             "sp_max_2050_ND_RCP4_elnino_Q66", "sp_max_2050_ND_RCP4_normal_Q66") 
+names(sp_max_stack_fut) <- c("sp_max_2100_dre_RCP8_elnino_Q50_DL", "sp_max_2100_dre_RCP8_normal_Q50_DL", 
+                             "sp_max_2100_dre_RCP4_elnino_Q50_DL", "sp_max_2100_dre_RCP4_normal_Q50_DL", 
+                             "sp_max_2100_ND_RCP8_elnino_Q50_DL", "sp_max_2100_ND_RCP8_normal_Q50_DL",
+                             "sp_max_2100_ND_RCP4_elnino_Q50_DL", "sp_max_2100_ND_RCP4_normal_Q50_DL",
+                             "sp_max_2100_dre_RCP8_elnino_Q33_DL", "sp_max_2100_dre_RCP8_normal_Q33_DL",
+                             "sp_max_2100_ND_RCP4_elnino_Q66_DL", "sp_max_2100_ND_RCP4_normal_Q66_DL",
+                             "sp_max_2050_dre_RCP8_elnino_Q50_DL", "sp_max_2050_dre_RCP8_normal_Q50_DL", 
+                             "sp_max_2050_dre_RCP4_elnino_Q50_DL", "sp_max_2050_dre_RCP4_normal_Q50_DL", 
+                             "sp_max_2050_ND_RCP8_elnino_Q50_DL", "sp_max_2050_ND_RCP8_normal_Q50_DL",
+                             "sp_max_2050_ND_RCP4_elnino_Q50_DL", "sp_max_2050_ND_RCP4_normal_Q50_DL",
+                             "sp_max_2050_dre_RCP8_elnino_Q33_DL", "sp_max_2050_dre_RCP8_normal_Q33_DL",
+                             "sp_max_2050_ND_RCP4_elnino_Q66_DL", "sp_max_2050_ND_RCP4_normal_Q66_DL",
+                             "sp_max_2100_dre_RCP4_normal_Q50_CP", "sp_max_2100_dre_RCP4_elnino_Q50_CP",
+                             "sp_max_2100_dre_RCP8_normal_Q50_CP", "sp_max_2100_dre_RCP8_elnino_Q50_CP",
+                             "sp_max_2100_dre_RCP8_normal_Q33_CP", "sp_max_2100_dre_RCP8_elnino_Q33_CP",
+                             "sp_max_2100_ND_RCP4_normal_Q50_CP", "sp_max_2100_ND_RCP4_elnino_Q50_CP",
+                             "sp_max_2100_ND_RCP8_normal_Q50_CP", "sp_max_2100_ND_RCP8_elnino_Q50_CP",
+                             "sp_max_2100_ND_RCP4_normal_Q66_CP", "sp_max_2100_ND_RCP4_elnino_Q66_CP") 
 
 writeRaster(sp_max_stack_fut, "C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/sp_max_stack_fut.grd", format = "raster", overwrite = TRUE)
 sp_max_stack_fut <- raster::stack("C:/Users/Jenny/Documents/JennySCCWRP/LitReview/UCI/working data/sp_max_stack_fut.grd")
@@ -1606,36 +1630,36 @@ UNB <- st_as_sf(UNB)
 #extract the approriate metrics (SPSP_MAX_grt60 + SPSP_MAX_95 + SPSP_MAX_grt90) and tidy up data
 
 #grt_90 (proportion of acre with spartina greater than 90cm)
-bird_dat_inundation_fut<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_90, layer = 1, nl = 24))
-names(bird_dat_inundation_fut)[2:25] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_90, layer = 1, nl = 36))
+names(bird_dat_inundation_fut)[2:37] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy <- bird_dat_inundation_fut %>% 
-  gather(sp_max_2100_dre_RCP8_elnino_Q50:sp_max_2050_ND_RCP4_normal_Q66, key = "key", value = "SPSP_MAX_grt90", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino_Q50_DL:sp_max_2100_ND_RCP4_elnino_Q66_CP, key = "key", value = "SPSP_MAX_grt90", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow", "model"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #MAX_95 (95% percentile value of the max spartina height)
-bird_dat_inundation_fut_2<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = nintyfifthpercentile, layer = 1, nl = 24))
-names(bird_dat_inundation_fut_2)[2:25] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut_2<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = nintyfifthpercentile, layer = 1, nl = 36))
+names(bird_dat_inundation_fut_2)[2:37] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy_2 <- bird_dat_inundation_fut_2 %>% 
-  gather(sp_max_2100_dre_RCP8_elnino_Q50:sp_max_2050_ND_RCP4_normal_Q66, key = "key", value = "SPSP_MAX_95", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino_Q50_DL:sp_max_2100_ND_RCP4_elnino_Q66_CP, key = "key", value = "SPSP_MAX_95", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow", "model"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #MAX_grt60 (proportion of acre with spartina greater than 60cm)
-bird_dat_inundation_fut_3<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_60, layer = 1, nl = 24))
-names(bird_dat_inundation_fut_3)[2:25] <- names(sp_max_stack_fut)
+bird_dat_inundation_fut_3<-cbind(UNB, raster::extract(x = sp_max_stack_fut, y = UNB, fun = perc_grt_60, layer = 1, nl = 36))
+names(bird_dat_inundation_fut_3)[2:37] <- names(sp_max_stack_fut)
 bird_dat_inundation_fut_tidy_3 <- bird_dat_inundation_fut_3 %>% 
-  gather(sp_max_2100_dre_RCP8_elnino_Q50:sp_max_2050_ND_RCP4_normal_Q66, key = "key", value = "SPSP_MAX_grt60", na.rm = T) %>% 
-  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow"), sep = "_") %>% 
+  gather(sp_max_2100_dre_RCP8_elnino_Q50_DL:sp_max_2100_ND_RCP4_elnino_Q66_CP, key = "key", value = "SPSP_MAX_grt60", na.rm = T) %>% 
+  separate(key, c("spp", "max", "year", "sediment", "RCP", "yrtype", "flow", "model"), sep = "_") %>% 
   dplyr::select(-"spp", -"max")
 
 #join future sp metrics
 bird_dat_inundation_fut_4 <- left_join(data.frame(bird_dat_inundation_fut_tidy), 
                                        data.frame(bird_dat_inundation_fut_tidy_2),
-                                       by = c("UID", "year", "sediment", "RCP", "yrtype", "flow"))
+                                       by = c("UID", "year", "sediment", "RCP", "yrtype", "flow", "model"))
 bird_dat_inundation_fut_4 <- left_join(bird_dat_inundation_fut_4, 
                                        data.frame(bird_dat_inundation_fut_tidy_3),
-                                       by = c("UID", "year", "sediment", "RCP", "yrtype", "flow"))
+                                       by = c("UID", "year", "sediment", "RCP", "yrtype", "flow", "model"))
 bird_dat_inundation_fut_4 <- bird_dat_inundation_fut_4 %>% 
   select(-c("geometry.x", "geometry.y", "geometry"))
 
